@@ -1,0 +1,722 @@
+import org.junit.Test;
+
+import cs3500.music.model.MusicModel;
+import cs3500.music.model.Note;
+import cs3500.music.model.Tone;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+
+/**
+ * tests for music model
+ */
+public class MusicModelTest {
+
+  // test for notes
+
+  @Test
+  public void testNoteEquality() {
+    Note n1 = new Note(Tone.A, 1, 3, 0);
+
+    Note n2 = new Note(Tone.A, 1, 3, 0);
+
+    Note n3 = new Note(Tone.B, 1, 3, 0);
+
+    assertEquals(n1.equals(n2), true);
+    assertNotEquals(n2.equals(n3), true);
+  }
+
+
+  // test for music models
+
+  // tests for music model construction
+
+  @Test
+  public void testStringBasic() {
+    MusicModel mm = new MusicModel();
+
+
+    assertEquals("╔═╗\n" +
+            "║ ║\n" +
+            "╚═╝\n", mm.toString());
+  }
+
+
+  // test for write
+
+  @Test
+  public void testWriteBasic() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 3);
+
+
+    assertEquals(1, mm.getMusic().get(9).size());
+    assertEquals(true, mm.getMusic().get(9).get(0).equals(new Note(Tone.A, 1, 3, 0)));
+  }
+
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testWriteExc0() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(null, 1, 1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testWriteExc2() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testWriteExc3() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 11);
+  }
+
+  @Test
+  public void testWriteBasic2() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.advance();
+    mm.write(Tone.A, 1, 3);
+
+
+    assertEquals(2, mm.getMusic().get(9).size());
+    assertEquals(true, mm.getMusic().get(9).get(0).equals(new Note(Tone.A, 1, 3, 0)));
+    assertEquals(true, mm.getMusic().get(9).get(1).equals(new Note(Tone.A, 1, 3, 1)));
+
+  }
+
+
+  // test toString
+
+  @Test
+  public void testStringBasic2() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 3);
+    mm.write(Tone.Dsharp, 2, 3);
+    mm.advance();
+    mm.write(Tone.B, 1, 4);
+
+
+    assertEquals(
+            "╔══════════════════════════════════════════════════════════════════════════════" +
+                    "════════════════════════════╗\n" +
+                    "║  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4" +
+                    "   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+                    "║0  X                             X                                    " +
+                    "                                    ║\n" +
+                    "║1  |                                                                  " +
+                    "                                 X  ║\n" +
+                    "║2                                                                     " +
+                    "                                    ║\n" +
+                    "╚══════════════════════════════════════════════════════════════════════" +
+                    "════════════════════════════════════╝\n", mm.toString());
+  }
+
+  @Test
+  public void testBeatSpacingCorrect() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 1, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.advance();
+    mm.write(Tone.B, 12, 4);
+
+    assertEquals(
+            "╔══════════════════════════════════════════════════════════════════════════════" +
+                    "══════════════════════════════════╗\n" +
+                    "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  " +
+                    "D#4   E4   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+                    "║ 0  X                                  X                             " +
+                    "                                           ║\n" +
+                    "║ 1  |                                                                " +
+                    "                                        X  ║\n" +
+                    "║ 2                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 3                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 4                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 5                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 6                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 7                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 8                                                                   " +
+                    "                                        |  ║\n" +
+                    "║ 9                                                                    " +
+                    "                                       |  ║\n" +
+                    "║10                                                                    " +
+                    "                                       |  ║\n" +
+                    "║11                                                                    " +
+                    "                                       |  ║\n" +
+                    "║12                                                                    " +
+                    "                                       |  ║\n" +
+                    "║13                                                                    " +
+                    "                                          ║\n" +
+                    "╚═════════════════════════════════════════════════════════════════════" +
+                    "═══════════════════════════════════════════╝\n", mm.toString());
+  }
+
+
+  @Test
+  public void testStringOverlappingNotes() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.advance();
+    mm.write(Tone.B, 12, 4);
+    mm.write(Tone.A, 3, 3);
+
+    assertEquals(
+            "╔═══════════════════════════════════════════════════════════════════════════════" +
+                    "═════════════════════════════════╗\n" +
+                    "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4 " +
+                    "  E4   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+                    "║ 0  X                                  X                                " +
+                    "                                        ║\n" +
+                    "║ 1  |                                  X                                " +
+                    "                                     X  ║\n" +
+                    "║ 2                                     |                                " +
+                    "                                     |  ║\n" +
+                    "║ 3                                     |                                " +
+                    "                                     |  ║\n" +
+                    "║ 4                                                                      " +
+                    "                                     |  ║\n" +
+                    "║ 5                                                                      " +
+                    "                                     |  ║\n" +
+                    "║ 6                                                                      " +
+                    "                                     |  ║\n" +
+                    "║ 7                                                                      " +
+                    "                                     |  ║\n" +
+                    "║ 8                                                                      " +
+                    "                                     |  ║\n" +
+                    "║ 9                                                                      " +
+                    "                                     |  ║\n" +
+                    "║10                                                                      " +
+                    "                                     |  ║\n" +
+                    "║11                                                                      " +
+                    "                                     |  ║\n" +
+                    "║12                                                                      " +
+                    "                                     |  ║\n" +
+                    "║13                                                                      " +
+                    "                                        ║\n" +
+                    "╚════════════════════════════════════════════════════════════════════════" +
+                    "════════════════════════════════════════╝\n", mm.toString());
+  }
+
+
+  @Test
+  public void testDuplicateNote() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.write(Tone.A, 3, 3);
+
+    mm.advance();
+    mm.write(Tone.B, 12, 4);
+
+    assertEquals("╔═════════════════════════════════════════════════════════════════════════" +
+            "═══════════════════════════════════════╗\n" +
+            "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4  " +
+            " D4  D#4   E4   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+            "║ 0  X                                  X                        " +
+            "                                                ║\n" +
+            "║ 1  |                                  |                        " +
+            "                                             X  ║\n" +
+            "║ 2                                     |                        " +
+            "                                             |  ║\n" +
+            "║ 3                                                               " +
+            "                                            |  ║\n" +
+            "║ 4                                                              " +
+            "                                             |  ║\n" +
+            "║ 5                                                              " +
+            "                                             |  ║\n" +
+            "║ 6                                                             " +
+            "                                              |  ║\n" +
+            "║ 7                                                             " +
+            "                                              |  ║\n" +
+            "║ 8                                                             " +
+            "                                              |  ║\n" +
+            "║ 9                                                             " +
+            "                                              |  ║\n" +
+            "║10                                                             " +
+            "                                              |  ║\n" +
+            "║11                                                              " +
+            "                                             |  ║\n" +
+            "║12                                                              " +
+            "                                             |  ║\n" +
+            "║13                                                              " +
+            "                                                ║\n" +
+            "╚════════════════════════════════════════════════════════════════" +
+            "════════════════════════════════════════════════╝\n", mm.toString());
+  }
+
+
+  // test remove
+
+
+  @Test
+  public void testRemoveBasic() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.advance();
+    mm.write(Tone.B, 12, 4);
+    mm.write(Tone.A, 43, 3);
+
+    mm.remove(new Note(Tone.A, 43, 3, 1));
+
+    assertEquals(1, mm.getMusic().get(9).size());
+
+    assertEquals("╔══════════════════════════════════════════════════════════════════════" +
+            "══════════════════════════════════════════╗\n" +
+            "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4  " +
+            " E4   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+            "║ 0  X                                  X                                    " +
+            "                                    ║\n" +
+            "║ 1  |                                  |                                    " +
+            "                                 X  ║\n" +
+            "║ 2                                     |                                    " +
+            "                                 |  ║\n" +
+            "║ 3                                                                          " +
+            "                                 |  ║\n" +
+            "║ 4                                                                            " +
+            "                               |  ║\n" +
+            "║ 5                                                                             " +
+            "                              |  ║\n" +
+            "║ 6                                                                            " +
+            "                               |  ║\n" +
+            "║ 7                                                                            " +
+            "                               |  ║\n" +
+            "║ 8                                                                             " +
+            "                              |  ║\n" +
+            "║ 9                                                                             " +
+            "                              |  ║\n" +
+            "║10                                                                             " +
+            "                              |  ║\n" +
+            "║11                                                                             " +
+            "                              |  ║\n" +
+            "║12                                                                              " +
+            "                             |  ║\n" +
+            "║13                                                                             " +
+            "                                 ║\n" +
+            "╚═══════════════════════════════════════════════════════════════════════════════" +
+            "═════════════════════════════════╝\n", mm.toString());
+  }
+
+  @Test
+  public void testRemovalUpdatesStringOutputCorrectly() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.D, 2, 3);
+    mm.advance();
+    mm.write(Tone.B, 12, 4);
+
+    assertEquals("╔══════════════════════════════════════════════════════════════════════" +
+            "══════════════════════════════════════════╗\n" +
+            "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4  " +
+            " E4   F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+            "║ 0  X                                  X                             " +
+            "                                           ║\n" +
+            "║ 1  |                                  |                         " +
+            "                                            X  ║\n" +
+            "║ 2                                     |                  " +
+            "                                                   |  ║\n" +
+            "║ 3                                                        " +
+            "                                                   |  ║\n" +
+            "║ 4                                                            " +
+            "                                               |  ║\n" +
+            "║ 5                                                                 " +
+            "                                          |  ║\n" +
+            "║ 6                                                                  " +
+            "                                         |  ║\n" +
+            "║ 7                                                                         " +
+            "                                  |  ║\n" +
+            "║ 8                                                                         " +
+            "                                  |  ║\n" +
+            "║ 9                                                                         " +
+            "                                  |  ║\n" +
+            "║10                                                                            " +
+            "                               |  ║\n" +
+            "║11                                                                            " +
+            "                               |  ║\n" +
+            "║12                                                                             " +
+            "                              |  ║\n" +
+            "║13                                                                             " +
+            "                                 ║\n" +
+            "╚══════════════════════════════════════════════════════════════════════════════" +
+            "══════════════════════════════════╝\n", mm.toString());
+
+
+    mm.remove(new Note(Tone.A, 12, 3, 1));
+
+    assertEquals("╔═══════════════════════════════════════════════════════════════════════════" +
+            "═════════════════════════════════════╗\n" +
+            "║    D3  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   " +
+            "F4  F#4   G4  G#4   A4  A#4   B4 ║\n" +
+            "║ 0  X                                  X                                        " +
+            "                                ║\n" +
+            "║ 1  |                                  |                                        " +
+            "                             X  ║\n" +
+            "║ 2                                     |                                       " +
+            "                              |  ║\n" +
+            "║ 3                                                                              " +
+            "                             |  ║\n" +
+            "║ 4                                                                              " +
+            "                             |  ║\n" +
+            "║ 5                                                                              " +
+            "                             |  ║\n" +
+            "║ 6                                                                             " +
+            "                              |  ║\n" +
+            "║ 7                                                                              " +
+            "                             |  ║\n" +
+            "║ 8                                                                             " +
+            "                              |  ║\n" +
+            "║ 9                                                                             " +
+            "                              |  ║\n" +
+            "║10                                                                             " +
+            "                              |  ║\n" +
+            "║11                                                                             " +
+            "                              |  ║\n" +
+            "║12                                                                              " +
+            "                             |  ║\n" +
+            "║13                                                                             " +
+            "                                 ║\n" +
+            "╚═══════════════════════════════════════════════════════════════════════════════" +
+            "═════════════════════════════════╝\n", mm.toString());
+  }
+
+
+  // tests for edit
+
+
+  // note: this particular test also tests that overlapping notes display correctly
+  @Test
+  public void testEditDoesntAffectSize() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.A, 2, 3);
+    mm.advance();
+    mm.write(Tone.A, 12, 4);
+
+    mm.edit(new Note(Tone.A, 12, 4, 1), new Note(Tone.A, 2, 4, 1));
+
+    assertEquals(mm.getMusic().get(9).size(), 3);
+
+    assertEquals("╔══════════════════════════════════════════════════════════════════╗\n" +
+                    "║   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4  G#4   A4 ║\n" +
+                    "║0  X                                                              ║\n" +
+                    "║1  |                                                           X  ║\n" +
+                    "║2  |                                                           |  ║\n" +
+                    "║3                                                                 ║\n" +
+                    "╚══════════════════════════════════════════════════════════════════╝\n",
+            mm.toString());
+
+  }
+
+  @Test
+  public void testEditDoesntChangeIfInvalidNote() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.A, 2, 3);
+    mm.advance();
+    mm.write(Tone.A, 4, 4);
+
+    mm.edit(new Note(Tone.A, 4, 4, 1), new Note(Tone.A, 12, 4, 1));
+
+    assertEquals("╔═══════════════════════════════════════════════════════════════════╗\n" +
+                    "║    A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4  G#4   A4 ║\n" +
+                    "║ 0  X                                                              ║\n" +
+                    "║ 1  |                                                           X  ║\n" +
+                    "║ 2  |                                                           |  ║\n" +
+                    "║ 3                                                              |  ║\n" +
+                    "║ 4                                                              |  ║\n" +
+                    "║ 5                                                              |  ║\n" +
+                    "║ 6                                                              |  ║\n" +
+                    "║ 7                                                              |  ║\n" +
+                    "║ 8                                                              |  ║\n" +
+                    "║ 9                                                              |  ║\n" +
+                    "║10                                                              |  ║\n" +
+                    "║11                                                              |  ║\n" +
+                    "║12                                                              |  ║\n" +
+                    "║13                                                                 ║\n" +
+                    "╚═══════════════════════════════════════════════════════════════════╝\n",
+            mm.toString());
+  }
+
+
+  @Test
+  public void testAddingToFirstInColumn() {
+    MusicModel mm = new MusicModel();
+
+    mm.write(Tone.A, 3, 3);
+    mm.write(Tone.A, 2, 3);
+    mm.advance();
+    mm.write(Tone.A, 12, 4);
+
+    mm.edit(new Note(Tone.A, 12, 4, 1), new Note(Tone.C, 2, 4, 4));
+
+    assertEquals("╔═════════════════════╗\n" +
+                    "║   A3  A#3   B3   C4 ║\n" +
+                    "║0  X                 ║\n" +
+                    "║1  |                 ║\n" +
+                    "║2  |                 ║\n" +
+                    "║3                    ║\n" +
+                    "║4                 X  ║\n" +
+                    "║5                 |  ║\n" +
+                    "║6                    ║\n" +
+                    "╚═════════════════════╝\n",
+            mm.toString());
+  }
+
+
+  // tests combine
+
+  @Test
+  public void testCombine() {
+    MusicModel mm1 = new MusicModel();
+
+    MusicModel mm2 = new MusicModel();
+
+    mm1.write(Tone.A, 1, 3);
+    mm2.write(Tone.Dsharp, 2, 3);
+    mm1.advance();
+    mm2.advance();
+    mm1.write(Tone.B, 1, 4);
+    mm2.write(Tone.E, 4, 3);
+
+    mm1.combine(mm2);
+
+    assertEquals("╔═══════════════════════════════════════════════════════════════════════════" +
+            "═══════════════════════════════╗\n" +
+            "║  D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4" +
+            "   G4  G#4   A4  A#4   B4 ║\n" +
+            "║0  X                             X                                              " +
+            "                          ║\n" +
+            "║1  |    X                                                                       " +
+            "                       X  ║\n" +
+            "║2       |                                                                      " +
+            "                           ║\n" +
+            "║3       |                                                                      " +
+            "                           ║\n" +
+            "║4       |                                                                      " +
+            "                           ║\n" +
+            "║5                                                                              " +
+            "                           ║\n" +
+            "╚═══════════════════════════════════════════════════════════════════════════════" +
+            "═══════════════════════════╝\n", mm1.toString());
+
+
+  }
+
+  // tests for append
+
+
+  // not quite working yet
+  @Test
+  public void testAppendBasic() {
+    MusicModel mm1 = new MusicModel();
+
+    MusicModel mm2 = new MusicModel();
+
+    mm1.write(Tone.A, 1, 3);
+    mm2.write(Tone.Dsharp, 2, 3);
+    mm1.advance();
+    mm2.advance();
+    mm1.write(Tone.B, 5, 4);
+    mm2.write(Tone.E, 4, 3);
+
+    mm1.append(mm2);
+
+    assertEquals("╔══════════════════════════════════════════════════════════════════════════" +
+            "═════════════════════════════════╗\n" +
+            "║   D#3   E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  " +
+            "F#4   G4  G#4   A4  A#4   B4 ║\n" +
+            "║ 0                                X                                            " +
+            "                            ║\n" +
+            "║ 1                                                                             " +
+            "                         X  ║\n" +
+            "║ 2                                                                             " +
+            "                         |  ║\n" +
+            "║ 3                                                                            " +
+            "                          |  ║\n" +
+            "║ 4                                                                             " +
+            "                         |  ║\n" +
+            "║ 5                                                                             " +
+            "                         |  ║\n" +
+            "║ 6  X                                                                          " +
+            "                            ║\n" +
+            "║ 7  |    X                                                                      " +
+            "                           ║\n" +
+            "║ 8       |                                                                      " +
+            "                           ║\n" +
+            "║ 9       |                                                                      " +
+            "                           ║\n" +
+            "║10       |                                                                      " +
+            "                           ║\n" +
+            "║11                                                                              " +
+            "                           ║\n" +
+            "╚════════════════════════════════════════════════════════════════════════════════" +
+            "═══════════════════════════╝\n", mm1.toString());
+  }
+
+
+  @Test
+  public void testMHALL() {
+
+    MusicModel m1 = new MusicModel();
+
+    m1.write(Tone.G, 7, 3);
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.C, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 7, 3);
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 3, 4);
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 8, 3);
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 4, 4);
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 2, 3);
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 4, 4);
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 8, 3);
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.C, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 8, 3);
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.G, 8, 3);
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.E, 8, 3);
+    m1.write(Tone.C, 8, 4);
+
+
+    assertEquals("w", m1.toString());
+  }
+
+
+  @Test
+  public void testMHALL2() {
+
+    MusicModel m1 = new MusicModel();
+
+
+    m1.write(Tone.G, 8, 3);
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 2, 4);
+    m1.advance();
+    m1.advance();
+    m1.write(Tone.D, 4, 4);
+    m1.advance();
+    m1.advance();
+    m1.advance();
+    m1.advance();
+
+    m1.write(Tone.G, 2, 3);
+    m1.write(Tone.E, 2, 4);
+
+
+    assertEquals("w", m1.toString());
+  }
+
+
+  @Test
+  public void testMHALL3() {
+    MusicModel m1 = new MusicModel();
+
+    m1.write(Tone.A, 2, 3);
+    m1.advance();
+    m1.write(Tone.A, 4, 3);
+    //  m1.advance();
+
+    assertEquals("w", m1.toString());
+  }
+
+
+}
