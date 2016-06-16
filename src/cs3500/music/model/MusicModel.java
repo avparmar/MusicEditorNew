@@ -173,6 +173,24 @@ public class MusicModel implements IMusicModel {
   }
 
   /**
+   * gets the amount of time this song takes to play
+   */
+  public int getTotalTime() {
+    List<List<Note>> first = getMusic();
+    int end = 0;
+    int l = 0;
+    for (int a1 = 0; a1 < 12; a1++) {
+      l = first.get(a1).size();
+      for (int a2 = 0; a2 < l; a2++) {
+        if (first.get(a1).get(a2).getStart() + first.get(a1).get(a2).getDuration() > end) {
+          end = first.get(a1).get(a2).getStart() + first.get(a1).get(a2).getDuration();
+        }
+      }
+    }
+    return end;
+  }
+
+  /**
    * a string representation, looks like the thing on the website
    */
   @Override

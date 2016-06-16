@@ -69,11 +69,11 @@ public interface IMusicModel {
    */
   public void advance();
 
-  /**
-   * gets the notes at the given beat
-   *
-   * @param
-   */
+  public int getTotalTime();
+
+
+
+
 
 
 }

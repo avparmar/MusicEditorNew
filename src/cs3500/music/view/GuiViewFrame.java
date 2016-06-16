@@ -1,5 +1,7 @@
 package cs3500.music.view;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
+
 import java.awt.*;
 import java.awt.event.MouseListener; // Possibly of interest for handling mouse events
 import java.util.ArrayList;
@@ -34,14 +36,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(100, 100);
+    return new Dimension(1000, 500);
   }
 
   @Override
   public void display(IMusicModel m) {
-    List<List<Note>> curMusic = m.getMusic();
-    ArrayList<Note> tones = new ArrayList<>();
-
 
   }
+
 }
