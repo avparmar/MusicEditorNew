@@ -22,4 +22,5 @@ public class ConcreteGuiViewPanel extends JPanel {
     g.drawString("Hello World", 25, 25);
   }
 
+
 }

@@ -2,8 +2,13 @@ package cs3500.music.view;
 
 import java.awt.*;
 import java.awt.event.MouseListener; // Possibly of interest for handling mouse events
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
+
+import cs3500.music.model.IMusicModel;
+import cs3500.music.model.Note;
 
 /**
  * A skeleton Frame (i.e., a window) in Swing
@@ -33,7 +38,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
   }
 
   @Override
-  public void display() {
+  public void display(IMusicModel m) {
+    List<List<Note>> curMusic = m.getMusic();
+    ArrayList<Note> tones = new ArrayList<>();
+
 
   }
 }
