@@ -177,7 +177,12 @@ public class ConcreteGuiViewPanel extends JPanel {
     for (int r = 0; r < curMusic.size(); r++) {
       int x = 50;
       int n = 0;
-
+      boolean hasRow;
+      if (curMusic.get(r).isEmpty()) {
+        hasRow = false;
+      } else {
+        hasRow = true;
+      }
       for (int b = 0; b < totalTime; b++) {
         if (n >= curMusic.get(r).size()) {
           break;
@@ -199,7 +204,10 @@ public class ConcreteGuiViewPanel extends JPanel {
           x += 15;
         }
       }
-      y += 10;
+
+      if (hasRow) {
+        y += 20;
+      }
     }
 
   }
