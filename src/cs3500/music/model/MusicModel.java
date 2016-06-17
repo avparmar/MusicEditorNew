@@ -141,7 +141,6 @@ public class MusicModel implements IMusicModel{
    */
   public void append(IMusicModel music) {
     List<List<Note>> second = music.getMusic();
-    List<List<Note>> first = getMusic();
     int end = getTotalTime();
 
     int len;
@@ -200,11 +199,9 @@ public class MusicModel implements IMusicModel{
         n = cc.get(i).get(j);
         if (n.getOctave() >= maxO) {
           maxO = n.getOctave();
-          //         if (n.getTone().ordinal() > maxT) maxT = n.getTone().ordinal();
         }
         if (n.getOctave() <= minO) {
           minO = n.getOctave();
-          //         if (n.getTone().ordinal() < minT) minT = n.getTone().ordinal();
         }
       }
 
@@ -294,8 +291,7 @@ public class MusicModel implements IMusicModel{
 
 
 
-    currT = minT;
-    currO = minO;
+
     int currBeat = 0;
     boolean breaker = false;
     boolean winner = false;
