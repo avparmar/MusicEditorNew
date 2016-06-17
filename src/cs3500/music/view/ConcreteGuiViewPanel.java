@@ -145,6 +145,25 @@ public class ConcreteGuiViewPanel extends JPanel {
           g.drawRect(x, y, 60, 20);
         }
       }
+
+      for (int b = 0; b < totalTime; b++) {
+        for (int j = 0; j < arrCur.size(); j++) {
+          for (int h = 0; h < arrCur.get(j).size(); h++) {
+            Graphics c = g.create();
+            if (arrCur.get(0).get(0).getStart() == b) {
+              c.setColor(Color.black);
+              c.drawRect(50, 50, 10, 10);
+            } else {
+              c.setColor(Color.blue);
+              c.drawRect(50, 50, 10, 10);
+
+            }
+
+          }
+        }
+      }
+
+
       first += 220;
     }
 
