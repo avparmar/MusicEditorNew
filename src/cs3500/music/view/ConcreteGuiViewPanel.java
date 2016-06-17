@@ -21,6 +21,7 @@ public class ConcreteGuiViewPanel extends JPanel {
 
   private IMusicModel m = new MusicModel();
 
+
   public void initData() {
     m.write(Tone.G, 7, 3);
     m.write(Tone.E, 2, 4);
@@ -169,37 +170,33 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
 
 
-    int x = 50;
+
     int y = 30;
     Graphics cube = g.create();
 
     for (int r = 0; r < curMusic.size(); r++) {
+      int x = 50;
+      int n = 0;
 
-      int q = 0;
       for (int b = 0; b < totalTime; b++) {
-
-        int tempX = x;
-        int tempY = y;
-        int tempQ = q;
-
-        if (tempQ > curMusic.get(r).size()) {
+        if (n >= curMusic.get(r).size()) {
           break;
         }
+        Note curNote = curMusic.get(r).get(n);
 
-        if (curMusic.get(r).isEmpty()) {
-          break;
-
-        } else if (curMusic.get(r).get(q).getStart() == b) {
+        if (curNote.getStart() == b) {
           cube.setColor(Color.black);
-          cube.drawRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
-          cube.fillRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
-          tempQ += 1;
-        } else if (curMusic.get(r).get(q).getStart() == b - 1) {
+          cube.drawRect(x, y, curNote.getDuration() * 15, 20);
+          cube.fillRect(x, y, curNote.getDuration() * 15, 20);
+          x += 15;
+        } else if (curNote.getStart() == b - 1) {
           cube.setColor(Color.blue);
-          cube.drawRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
-          cube.fillRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
-          tempX += 60;
-          tempQ += 1;
+          cube.drawRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          cube.fillRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          x += 15;
+          n += 1;
+        } else {
+          x += 15;
         }
       }
       y += 10;
@@ -244,7 +241,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   //public void addSpace(IMusicModel m, Graphics g);
-
 
 
 }
