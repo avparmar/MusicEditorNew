@@ -2,6 +2,8 @@ package cs3500.music.view;
 
 import javax.sound.midi.*;
 
+import cs3500.music.model.IMusicModel;
+
 /**
  * A skeleton for MIDI playback
  */
@@ -55,8 +57,9 @@ public class MidiViewImpl implements IView {
     this.receiver.close(); // Only call this once you're done playing *all* notes
   }
 
+
   @Override
-  public void display() {
+  public void display(IMusicModel m) {
 
   }
 }
