@@ -319,11 +319,9 @@ public class MusicModel implements IMusicModel{
         tailCheck = false;
         headCheck = false;
         len = cc.get(currT).size();
-        //      System.out.println(len + " " + currBeat + " ");
         winner = false;
         for (int b = 0; b < len; b++) {
           n = cc.get(currT).get(b);
-          //       System.out.print(b + " " + n.getStart() + " " + n.getDuration() + " ");
           if (n.getStart() <= currBeat &&
                   n.getOctave() == currO && n.getStart() + n.getDuration() -1 >= currBeat) {
             winner = true;
@@ -332,9 +330,7 @@ public class MusicModel implements IMusicModel{
             }
             else tailCheck = true;
           }
-          ///        System.out.println("x");
           if (n.getStart() + n.getDuration() == currBeat) {
-            //     System.out.println("y");
             cc.get(currT).remove(b);
             count++;
             len--;
