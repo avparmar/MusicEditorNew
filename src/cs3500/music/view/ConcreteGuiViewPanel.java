@@ -147,18 +147,13 @@ public class ConcreteGuiViewPanel extends JPanel {
       }
 
       for (int b = 0; b < totalTime; b++) {
-        for (int j = 0; j < arrCur.size(); j++) {
-          for (int h = 0; h < arrCur.get(j).size(); h++) {
-            Graphics c = g.create();
-            if (arrCur.get(0).get(0).getStart() == b) {
-              c.setColor(Color.black);
-              c.drawRect(50, 50, 10, 10);
-            } else {
-              c.setColor(Color.blue);
-              c.drawRect(50, 50, 10, 10);
-
-            }
-
+        for (int c = 0; c < arrCur.size(); c++) {
+          ArrayList a = arrCur.get(c);
+          int space = 10;
+          Graphics cube = g.create();
+          cube.setColor(Color.blue);
+          for (int s = 0; s < a.size(); s++) {
+            cube.drawRect(40 + space, 20 + space, 10, 10);
           }
         }
       }
