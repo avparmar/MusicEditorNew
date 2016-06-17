@@ -145,20 +145,6 @@ public class ConcreteGuiViewPanel extends JPanel {
           g.drawRect(x, y, 60, 20);
         }
       }
-
-      for (int b = 0; b < totalTime; b++) {
-        for (int c = 0; c < arrCur.size(); c++) {
-          ArrayList a = arrCur.get(c);
-          int space = 10;
-          Graphics cube = g.create();
-          cube.setColor(Color.blue);
-          for (int s = 0; s < a.size(); s++) {
-            cube.drawRect(40 + space, 20 + space, 10, 10);
-          }
-        }
-      }
-
-
       first += 220;
     }
 
@@ -180,6 +166,43 @@ public class ConcreteGuiViewPanel extends JPanel {
       String tempStr = tone + oct;
       g.drawString(tempStr, 25, j);
       j += 20;
+    }
+
+
+    int x = 50;
+    int y = 30;
+    Graphics cube = g.create();
+
+    for (int r = 0; r < curMusic.size(); r++) {
+
+      int q = 0;
+      for (int b = 0; b < totalTime; b++) {
+
+        int tempX = x;
+        int tempY = y;
+        int tempQ = q;
+
+        if (tempQ > curMusic.get(r).size()) {
+          break;
+        }
+
+        if (curMusic.get(r).isEmpty()) {
+          break;
+
+        } else if (curMusic.get(r).get(q).getStart() == b) {
+          cube.setColor(Color.black);
+          cube.drawRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
+          cube.fillRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
+          tempQ += 1;
+        } else if (curMusic.get(r).get(q).getStart() == b - 1) {
+          cube.setColor(Color.blue);
+          cube.drawRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
+          cube.fillRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
+          tempX += 60;
+          tempQ += 1;
+        }
+      }
+      y += 10;
     }
 
   }
