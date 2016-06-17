@@ -29,13 +29,54 @@ public class ConcreteGuiViewPanel extends JPanel {
 
   @Override
   public void paintComponent(Graphics g) {
+
     // Handle the default painting
     super.paintComponent(g);
+    Graphics cur = g.create();
     // Look for more documentation about the Graphics class,
     // and methods on it that may be useful
     this.initData();
-    this.renderBeats(this.m, g);
-    this.renderTones(this.m, g);
+    List<List<Note>> curMusic = m.getMusic();
+    int totalTime = m.getTotalTime();
+    for (int i = 0; i < totalTime; i += 16) {
+      String temp = Integer.toString(i);
+      g.drawString(temp, 50 + i, 25);
+
+      for (int x = 50; x < 900; x += 60) {
+        for (int y = 30; y < 275; y += 20) {
+          g.drawRect(x, y, 60, 20);
+
+        }
+      }
+    }
+
+    ArrayList<Note> curTones = new ArrayList<>();
+
+    for (int i = 0; i < curMusic.size(); i++) {
+      if (curMusic.get(i).isEmpty()) {
+
+      } else {
+        Note temp = curMusic.get(i).get(0);
+        curTones.add(temp);
+      }
+    }
+
+    int j = 45;
+    for (Note n : curTones) {
+      String tone = n.getTone().getString();
+      String oct = Integer.toString(n.getOctave());
+      String temp = tone + oct;
+      g.drawString(temp, 25, j);
+      j += 20;
+    }
+
+
+
+
+
+
+
+
 
   }
 
@@ -70,11 +111,13 @@ public class ConcreteGuiViewPanel extends JPanel {
       String tone = curTones.get(j).getTone().getString();
       String oct = Integer.toString(curTones.get(j).getOctave());
       String temp = tone + oct;
-
       g.drawString(temp, 25, start + inc);
     }
 
   }
+
+  //public void addSpace(IMusicModel m, Graphics g);
+
 
 
 }
