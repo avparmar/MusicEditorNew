@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import cs3500.music.model.Tone;
 public class ConcreteGuiViewPanel extends JPanel {
 
   private IMusicModel m = new MusicModel();
+
 
   public void initData() {
     m.write(Tone.G, 7, 3);
@@ -148,16 +150,60 @@ public class ConcreteGuiViewPanel extends JPanel {
       first += 220;
     }
 
+    int y = 30;
+    Graphics cube = g.create();
+
+    for (int r = 0; r < curMusic.size(); r++) {
+      int x = 50;
+      int n = 0;
+
+      boolean hasRow;
+      if (curMusic.get(r).isEmpty()) {
+        hasRow = false;
+      } else {
+        hasRow = true;
+      }
+      for (int b = 0; b < totalTime; b++) {
+        if (n >= curMusic.get(r).size()) {
+          break;
+        }
+        Note curNote = curMusic.get(r).get(n);
+
+        if (curNote.getStart() == b) {
+          cube.setColor(Color.black);
+          cube.drawRect(x, y, curNote.getDuration() * 15, 20);
+          cube.fillRect(x, y, curNote.getDuration() * 15, 20);
+          x += 15;
+        } else if (curNote.getStart() == b - 1) {
+          cube.setColor(Color.blue);
+          cube.drawRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          cube.fillRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          x += 15;
+          n += 1;
+        } else {
+          x += 15;
+        }
+      }
+
+      if (hasRow) {
+        y += 20;
+      }
+    }
+
     ArrayList<Note> curTones = new ArrayList<>();
 
     for (int h = 0; h < curMusic.size(); h++) {
+
+
       if (curMusic.get(h).isEmpty()) {
+
 
       } else {
         Note tempTone = curMusic.get(h).get(0);
         curTones.add(tempTone);
       }
     }
+
 
     int j = 45;
     for (Note n : curTones) {
@@ -169,41 +215,6 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
 
 
-    int x = 50;
-    int y = 30;
-    Graphics cube = g.create();
-
-    for (int r = 0; r < curMusic.size(); r++) {
-
-      int q = 0;
-      for (int b = 0; b < totalTime; b++) {
-
-        int tempX = x;
-        int tempY = y;
-        int tempQ = q;
-
-        if (tempQ > curMusic.get(r).size()) {
-          break;
-        }
-
-        if (curMusic.get(r).isEmpty()) {
-          break;
-
-        } else if (curMusic.get(r).get(q).getStart() == b) {
-          cube.setColor(Color.black);
-          cube.drawRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
-          cube.fillRect(tempX, tempY, curMusic.get(r).get(q).getDuration() * 15, 20);
-          tempQ += 1;
-        } else if (curMusic.get(r).get(q).getStart() == b - 1) {
-          cube.setColor(Color.blue);
-          cube.drawRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
-          cube.fillRect(tempX + 15, tempY, (curMusic.get(r).get(q).getDuration() - 1) * 15, 20);
-          tempX += 60;
-          tempQ += 1;
-        }
-      }
-      y += 10;
-    }
 
   }
 
@@ -244,7 +255,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   //public void addSpace(IMusicModel m, Graphics g);
-
 
 
 }

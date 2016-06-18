@@ -36,7 +36,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension(1000, 500);
+    return new Dimension(1500, 500);
   }
 
   @Override
