@@ -12,10 +12,11 @@ public class Note implements Comparable<Note> {
   private int duration;
   private int octave;
   private int start;
+  private int volume;
 
 
   /**
-   * constructs a note out of the things that determine how a note is
+   * constructs a note out of the things that determine how a note is, with default volume 60
    *
    * @param tone     the tone of the note
    * @param duration the duration, in beats, of the note
@@ -27,6 +28,24 @@ public class Note implements Comparable<Note> {
     this.duration = duration;
     this.octave = octave;
     this.start = start;
+    this.volume = 60;
+  }
+
+  /**
+   * constructs a note out of the things that determine how a note is
+   *
+   * @param tone     the tone of the note
+   * @param duration the duration, in beats, of the note
+   * @param octave   the octave of the note
+   * @param volume the volume
+   * @param start    the time the note will play
+   */
+  public Note(Tone tone, int duration, int octave, int start, int volume) {
+    this.tone = tone;
+    this.duration = duration;
+    this.octave = octave;
+    this.start = start;
+    this.volume = volume;
   }
 
 
@@ -36,6 +55,7 @@ public class Note implements Comparable<Note> {
   public boolean equals(Note that) {
     return this.tone.equals(that.tone) && this.duration == that.duration &&
             this.octave == that.octave && this.start == that.start;
+            //&& this.volume == that.volume;
   }
 
   @Override
@@ -63,6 +83,8 @@ public class Note implements Comparable<Note> {
   public Tone getTone() {
     return tone;
   }
+
+  public int getVolume() { return volume; }
 
   /**
    * for use in comparing by time

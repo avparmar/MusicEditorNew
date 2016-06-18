@@ -12,6 +12,7 @@ public class MusicModel implements IMusicModel{
   private int time;
   private List<Queue<Note>> notes;
   private int totalSize;
+  private long tempo;
 
   /**
    * constructs a music model
@@ -23,6 +24,8 @@ public class MusicModel implements IMusicModel{
       notes.add(new PriorityQueue<>());
     }
     int totalSize = 0;
+
+    tempo = 0;
   }
 
 
@@ -36,6 +39,7 @@ public class MusicModel implements IMusicModel{
   public void write(Tone tone, int duration, int octave) {
     if (tone == null) throw new IllegalArgumentException("no null");
     if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
+    if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
     if (duration < 1) throw new IllegalArgumentException("invalid duration");
     totalSize++;
     notes.get(tone.ordinal()).add(new Note(tone, duration, octave, getCurrentTime()));
@@ -77,10 +81,14 @@ public class MusicModel implements IMusicModel{
     for (int i = 0; i < 12; i++) {
       int len = notes.get(i).size();
       temp = notes.get(i).toArray();
+      Note n;
+      Note n1;
 
       cc.add(new ArrayList<>());
       for(int j = 0; j < len; j++) {
-        cc.get(i).add((Note) temp[j]);
+        n1 = (Note) temp[j];
+        n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(), n1.getVolume());
+        cc.get(i).add(n);
       }
     }
     return cc;
@@ -104,6 +112,11 @@ public class MusicModel implements IMusicModel{
   public void advance() {
     time++;
   }
+
+  /**
+   * reduces the beat by one
+   */
+  public void back() { time--; }
 
   /**
    * gets the current time
@@ -173,6 +186,33 @@ public class MusicModel implements IMusicModel{
     }
 
     return end;
+  }
+
+
+  /**
+   * used to write a note at the specified time.
+   */
+
+  public void writeTime(Tone tone, int duration, int octave, int start) {
+    if (start < 0) throw new IllegalArgumentException("invalid time");
+    int temp = time;
+    time = start;
+    write(tone, duration, octave);
+    time = temp;
+  }
+
+  /**
+   * gets the tempo
+   */
+  public long getTempo() {
+    return tempo;
+  }
+
+  /**
+   * sets tempo
+   */
+  public void setTempo(long t) {
+    tempo = t;
   }
 
 
