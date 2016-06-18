@@ -109,6 +109,10 @@ public class MidiViewImpl implements IView {
 
     MidiMessage start;
     MidiMessage stop;
+    MidiMessage insChange;
+
+    MidiChannel[] channel = synth.getChannels();
+
 
     Note n;
     int len;
@@ -119,6 +123,10 @@ public class MidiViewImpl implements IView {
         try {
           synth.loadInstrument(band[n.getInstrument()]);
 
+          insChange = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
+                  1,
+                  n.getInstrument(),
+                  n.getInstrument());
           start = new ShortMessage(ShortMessage.NOTE_ON,
                   1,
                   n.getOctave() * 12 + n.getTone().ordinal() + 12, n.getVolume());
@@ -126,11 +134,14 @@ public class MidiViewImpl implements IView {
                   1,
                   n.getOctave() * 12 + n.getTone().ordinal() + 12, n.getVolume());
 
+          this.receiver.send(insChange, 0);
           this.receiver.send(start, n.getStart() * tempo);
           this.receiver.send(stop, (n.getStart() + n.getDuration()) * tempo);
         } catch (InvalidMidiDataException e) {
           e.printStackTrace();
         }
+
+       // synth.unloadInstrument(band[34]);
       }
     }
 

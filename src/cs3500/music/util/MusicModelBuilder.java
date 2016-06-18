@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.music.model.IMusicModel;
+import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
 import cs3500.music.model.Tone;
 
@@ -21,7 +22,19 @@ public class MusicModelBuilder implements CompositionBuilder<IMusicModel> {
    */
   @Override
   public IMusicModel build() {
-    return null;
+
+    IMusicModel m = new MusicModel();
+    m.setTempo(tempo);
+    Note n;
+
+    int len = notes.size();
+    for (int i = 0; i < len; i++) {
+      n = notes.get(i);
+      m.writeTime(n.getTone(), n.getDuration(), n.getOctave(),
+              n.getStart(), n.getVolume(), n.getInstrument());
+    }
+
+    return m;
   }
 
   /**
@@ -75,9 +88,10 @@ public class MusicModelBuilder implements CompositionBuilder<IMusicModel> {
         break;
       case 11: t = Tone.B;
         break;
+      default: t = Tone.C;
     }
 
- //   notes.add(new Note(t, end - start, ));
+    notes.add(new Note(t, end - start, pitch/12 - 1, start, volume, instrument));
     return this;
   }
 }

@@ -40,7 +40,7 @@ public class MusicModel implements IMusicModel{
     if (tone == null) throw new IllegalArgumentException("no null");
     if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
     if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
-    if (duration < 1) throw new IllegalArgumentException("invalid duration");
+    if (duration < 1) throw new IllegalArgumentException("invalid duration: " + duration);
     totalSize++;
     notes.get(tone.ordinal()).add(new Note(tone, duration, octave, getCurrentTime()));
   }
@@ -49,7 +49,7 @@ public class MusicModel implements IMusicModel{
     if (tone == null) throw new IllegalArgumentException("no null");
     if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
     if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
-    if (duration < 1) throw new IllegalArgumentException("invalid duration");
+    if (duration < 1) throw new IllegalArgumentException("invalid duration: " + duration);
     totalSize++;
     notes.get(tone.ordinal()).add(new Note(tone, duration, octave, getCurrentTime(), volume));
   }
@@ -58,7 +58,7 @@ public class MusicModel implements IMusicModel{
     if (tone == null) throw new IllegalArgumentException("no null");
     if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
     if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
-    if (duration < 1) throw new IllegalArgumentException("invalid duration");
+    if (duration < 0) throw new IllegalArgumentException("invalid duration: " + duration);
     if (instrument < 0) throw new IllegalArgumentException("ewfrgethryjt");
     totalSize++;
     notes.get(tone.ordinal())
@@ -214,11 +214,11 @@ public class MusicModel implements IMusicModel{
    * used to write a note at the specified time.
    */
 
-  public void writeTime(Tone tone, int duration, int octave, int start) {
+  public void writeTime(Tone tone, int duration, int octave, int start, int volume, int instrument) {
     if (start < 0) throw new IllegalArgumentException("invalid time");
     int temp = time;
     time = start;
-    write(tone, duration, octave);
+    write(tone, duration, octave, volume, instrument);
     time = temp;
   }
 
