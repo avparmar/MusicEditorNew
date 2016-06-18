@@ -16,6 +16,10 @@ public interface IMusicModel {
    */
   public void write(Tone tone, int duration, int octave);
 
+  public void write(Tone tone, int duration, int octave, int volume);
+
+  public void write(Tone tone, int duration, int octave, int volume, int instrument);
+
   /**
    * edits the note equivalent to old and replaces it with new
    *
@@ -71,8 +75,8 @@ public interface IMusicModel {
 
   public int getTotalTime();
 
-  public long getTempo();
-  public void setTempo(long t);
+  public int getTempo();
+  public void setTempo(int t);
 
   public void writeTime(Tone tone, int duration, int octave, int start);
 

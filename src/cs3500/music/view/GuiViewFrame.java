@@ -22,11 +22,11 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
   /**
    * Creates new GuiView
    */
-  public GuiViewFrame() {
-    this.displayPanel = new ConcreteGuiViewPanel();
-    this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    this.getContentPane().add(displayPanel);
-    this.pack();
+  public GuiViewFrame(IMusicModel m) {
+    this.displayPanel = new ConcreteGuiViewPanel(m);
+//    this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//    this.getContentPane().add(displayPanel);
+//    this.pack();
   }
 
   //  @Override
@@ -40,7 +40,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
   }
 
   @Override
-  public void display(IMusicModel m) {
+  public void display() {
+    this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    this.getContentPane().add(displayPanel);
+    this.pack();
 
   }
 

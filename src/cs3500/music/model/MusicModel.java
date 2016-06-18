@@ -12,7 +12,7 @@ public class MusicModel implements IMusicModel{
   private int time;
   private List<Queue<Note>> notes;
   private int totalSize;
-  private long tempo;
+  private int tempo;
 
   /**
    * constructs a music model
@@ -44,6 +44,27 @@ public class MusicModel implements IMusicModel{
     totalSize++;
     notes.get(tone.ordinal()).add(new Note(tone, duration, octave, getCurrentTime()));
   }
+
+  public void write(Tone tone, int duration, int octave, int volume) {
+    if (tone == null) throw new IllegalArgumentException("no null");
+    if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
+    if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
+    if (duration < 1) throw new IllegalArgumentException("invalid duration");
+    totalSize++;
+    notes.get(tone.ordinal()).add(new Note(tone, duration, octave, getCurrentTime(), volume));
+  }
+
+  public void write(Tone tone, int duration, int octave, int volume, int instrument) {
+    if (tone == null) throw new IllegalArgumentException("no null");
+    if (octave < 1 || octave > 10) throw new IllegalArgumentException("invalid range octave");
+    if (octave == 10 && tone.ordinal() > 7) throw new IllegalArgumentException("nah");
+    if (duration < 1) throw new IllegalArgumentException("invalid duration");
+    if (instrument < 0) throw new IllegalArgumentException("ewfrgethryjt");
+    totalSize++;
+    notes.get(tone.ordinal())
+            .add(new Note(tone, duration, octave, getCurrentTime(), volume, instrument));
+  }
+
 
   /**
    * edits the note equivalent to old and replaces it with new; if old note doesn't exist, it won't
@@ -87,7 +108,7 @@ public class MusicModel implements IMusicModel{
       cc.add(new ArrayList<>());
       for(int j = 0; j < len; j++) {
         n1 = (Note) temp[j];
-        n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(), n1.getVolume());
+        n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(), n1.getVolume(), n1.getInstrument());
         cc.get(i).add(n);
       }
     }
@@ -204,14 +225,14 @@ public class MusicModel implements IMusicModel{
   /**
    * gets the tempo
    */
-  public long getTempo() {
+  public int getTempo() {
     return tempo;
   }
 
   /**
    * sets tempo
    */
-  public void setTempo(long t) {
+  public void setTempo(int t) {
     tempo = t;
   }
 

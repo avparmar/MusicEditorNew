@@ -8,9 +8,11 @@ import cs3500.music.model.IMusicModel;
 public class StringView implements IView {
 
   private String text;
+  IMusicModel m;
 
-  public StringView() {
+  public StringView(IMusicModel m) {
     this.text = "";
+    this.m = m;
   }
 
   public String getText() {
@@ -18,7 +20,7 @@ public class StringView implements IView {
   }
 
   @Override
-  public void display(IMusicModel m) {
+  public void display() {
     this.text = m.toString();
   }
 

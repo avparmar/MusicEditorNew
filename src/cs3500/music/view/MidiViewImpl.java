@@ -11,15 +11,17 @@ import cs3500.music.model.Note;
  * A skeleton for MIDI playback
  */
 public class MidiViewImpl implements IView {
-//  private final IMusicModel model;
+  private final IMusicModel m;
   private final Synthesizer synth;
   private final Receiver receiver;
+  private Instrument[] band;
 //  private final Sequencer sequencer;
  // private final Transmitter transmitter;
 
-  public MidiViewImpl() {
+  public MidiViewImpl(IMusicModel m) {
     Synthesizer synth1;
     Receiver r1;
+    this.m = m;
  //   Transmitter t1;
  //   Sequencer s1;
 
@@ -32,6 +34,8 @@ public class MidiViewImpl implements IView {
 //      t1.setReceiver(r1);
  //     s1.open();
       synth1.open();
+
+      band = synth1.getAvailableInstruments();
 
     } catch (MidiUnavailableException e) {
       e.printStackTrace();
@@ -99,7 +103,7 @@ public class MidiViewImpl implements IView {
 
 
   @Override
-  public void display(IMusicModel m) {
+  public void display() {
     long tempo = m.getTempo();
     List<List<Note>> cc = m.getMusic();
 
@@ -113,11 +117,13 @@ public class MidiViewImpl implements IView {
       for (int j = 0; j < len; j++) {
         n = cc.get(i).get(j);
         try {
+          synth.loadInstrument(band[n.getInstrument()]);
+
           start = new ShortMessage(ShortMessage.NOTE_ON,
-                  0,
+                  1,
                   n.getOctave() * 12 + n.getTone().ordinal() + 12, n.getVolume());
           stop = new ShortMessage(ShortMessage.NOTE_OFF,
-                  0,
+                  1,
                   n.getOctave() * 12 + n.getTone().ordinal() + 12, n.getVolume());
 
           this.receiver.send(start, n.getStart() * tempo);

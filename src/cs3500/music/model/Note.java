@@ -13,6 +13,7 @@ public class Note implements Comparable<Note> {
   private int octave;
   private int start;
   private int volume;
+  private int instrument;
 
 
   /**
@@ -29,6 +30,7 @@ public class Note implements Comparable<Note> {
     this.octave = octave;
     this.start = start;
     this.volume = 60;
+    this.instrument = 0;
   }
 
   /**
@@ -46,6 +48,25 @@ public class Note implements Comparable<Note> {
     this.octave = octave;
     this.start = start;
     this.volume = volume;
+    this.instrument = 0;
+  }
+
+  /**
+   * constructs a note out of the things that determine how a note is, with instrument too
+   *
+   * @param tone     the tone of the note
+   * @param duration the duration, in beats, of the note
+   * @param octave   the octave of the note
+   * @param volume the volume
+   * @param start    the time the note will play
+   */
+  public Note(Tone tone, int duration, int octave, int start, int volume, int instrument) {
+    this.tone = tone;
+    this.duration = duration;
+    this.octave = octave;
+    this.start = start;
+    this.volume = volume;
+    this.instrument = instrument;
   }
 
 
@@ -85,6 +106,11 @@ public class Note implements Comparable<Note> {
   }
 
   public int getVolume() { return volume; }
+
+  public int getInstrument() {
+    return instrument;
+  }
+
 
   /**
    * for use in comparing by time
