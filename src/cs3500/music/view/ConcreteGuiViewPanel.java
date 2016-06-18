@@ -149,41 +149,20 @@ public class ConcreteGuiViewPanel extends JPanel {
       first += 220;
     }
 
-    ArrayList<Note> curTones = new ArrayList<>();
-
-    for (int h = 0; h < curMusic.size(); h++) {
-      if (curMusic.get(h).isEmpty()) {
-
-      } else {
-        Note tempTone = curMusic.get(h).get(0);
-        curTones.add(tempTone);
-      }
-    }
-
-    int j = 45;
-    for (Note n : curTones) {
-      String tone = n.getTone().getString();
-      String oct = Integer.toString(n.getOctave());
-      String tempStr = tone + oct;
-      g.drawString(tempStr, 25, j);
-      j += 20;
-    }
-
-
-
     int y = 30;
     Graphics cube = g.create();
 
     for (int r = 0; r < curMusic.size(); r++) {
       int x = 50;
       int n = 0;
+      int tempTime = totalTime;
       boolean hasRow;
       if (curMusic.get(r).isEmpty()) {
         hasRow = false;
       } else {
         hasRow = true;
       }
-      for (int b = 0; b < totalTime; b++) {
+      for (int b = 0; b < tempTime; b++) {
         if (n >= curMusic.get(r).size()) {
           break;
         }
@@ -209,6 +188,30 @@ public class ConcreteGuiViewPanel extends JPanel {
         y += 20;
       }
     }
+
+    ArrayList<Note> curTones = new ArrayList<>();
+
+    for (int h = 0; h < curMusic.size(); h++) {
+      if (curMusic.get(h).isEmpty()) {
+
+      } else {
+        Note tempTone = curMusic.get(h).get(0);
+        curTones.add(tempTone);
+      }
+    }
+
+    int j = 45;
+    for (Note n : curTones) {
+      String tone = n.getTone().getString();
+      String oct = Integer.toString(n.getOctave());
+      String tempStr = tone + oct;
+      g.drawString(tempStr, 25, j);
+      j += 20;
+    }
+
+
+
+
 
   }
 
