@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -155,14 +156,14 @@ public class ConcreteGuiViewPanel extends JPanel {
     for (int r = 0; r < curMusic.size(); r++) {
       int x = 50;
       int n = 0;
-      int tempTime = totalTime;
+
       boolean hasRow;
       if (curMusic.get(r).isEmpty()) {
         hasRow = false;
       } else {
         hasRow = true;
       }
-      for (int b = 0; b < tempTime; b++) {
+      for (int b = 0; b < totalTime; b++) {
         if (n >= curMusic.get(r).size()) {
           break;
         }
@@ -192,13 +193,17 @@ public class ConcreteGuiViewPanel extends JPanel {
     ArrayList<Note> curTones = new ArrayList<>();
 
     for (int h = 0; h < curMusic.size(); h++) {
+
+
       if (curMusic.get(h).isEmpty()) {
+
 
       } else {
         Note tempTone = curMusic.get(h).get(0);
         curTones.add(tempTone);
       }
     }
+
 
     int j = 45;
     for (Note n : curTones) {
@@ -208,8 +213,6 @@ public class ConcreteGuiViewPanel extends JPanel {
       g.drawString(tempStr, 25, j);
       j += 20;
     }
-
-
 
 
 
