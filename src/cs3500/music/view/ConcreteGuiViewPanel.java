@@ -126,7 +126,7 @@ public class ConcreteGuiViewPanel extends JPanel {
 
     // Handle the default painting
     super.paintComponent(g);
-    Graphics cur = g.create();
+//    Graphics cur = g.create();
     // Look for more documentation about the Graphics class,
     // and methods on it that may be useful
  //   this.initData();
@@ -139,84 +139,6 @@ public class ConcreteGuiViewPanel extends JPanel {
         arrCur.get(a).add((Note) curMusic.get(a).get(z));
       }
     }
-
-    int totalTime = m.getTotalTime();
-    int first = 50;
-    for (int i = 0; i < totalTime; i += 16) {
-      String temp = Integer.toString(i);
-      g.drawString(temp, first + i, 25);
-
-      for (int x = 50; x < 900; x += 60) {
-        for (int y = 30; y < 275; y += 20) {
-          g.drawRect(x, y, 60, 20);
-        }
-      }
-      first += 220;
-    }
-
-    int y = 30;
-    Graphics cube = g.create();
-
-    for (int r = 0; r < curMusic.size(); r++) {
-      int x = 50;
-      int n = 0;
-
-      boolean hasRow;
-      if (curMusic.get(r).isEmpty()) {
-        hasRow = false;
-      } else {
-        hasRow = true;
-      }
-      for (int b = 0; b < totalTime; b++) {
-        if (n >= curMusic.get(r).size()) {
-          break;
-        }
-        Note curNote = curMusic.get(r).get(n);
-
-        if (curNote.getStart() == b) {
-          cube.setColor(Color.black);
-          cube.drawRect(x, y, curNote.getDuration() * 15, 20);
-          cube.fillRect(x, y, curNote.getDuration() * 15, 20);
-          x += 15;
-        } else if (curNote.getStart() == b - 1) {
-          cube.setColor(Color.blue);
-          cube.drawRect(x, y, (curNote.getDuration() - 1) * 15, 20);
-          cube.fillRect(x, y, (curNote.getDuration() - 1) * 15, 20);
-          x += 15;
-          n += 1;
-        } else {
-          x += 15;
-        }
-      }
-
-      if (hasRow) {
-        y += 20;
-      }
-    }
-/*
-    ArrayList<Note> curTones = new ArrayList<>();
-
-    for (int h = 0; h < curMusic.size(); h++) {
-
-
-      if (curMusic.get(h).isEmpty()) {
-
-
-      } else {
-        Note tempTone = curMusic.get(h).get(0);
-        curTones.add(tempTone);
-      }
-    }
-
-
-    int j = 45;
-    for (Note n : curTones) {
-      String tone = n.getTone().getString();
-      String oct = Integer.toString(n.getOctave());
-      String tempStr = tone + oct;
-      g.drawString(tempStr, 25, j);
-      j += 20;
-    }*/
 
     int maxO = -1;
     int minO = 11;
@@ -256,6 +178,89 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
 
     int width = (12 - minT) + (1 + maxT) + (12 * (maxO - minO - 1));
+
+
+    int totalTime = m.getTotalTime();
+    System.out.println(totalTime);
+    int first = 50;
+    for (int i = 0; i < totalTime; i += 16) {
+      String temp = Integer.toString(i);
+      g.drawString(temp, 50 + (15 * i), 25);
+      //first += 230;
+    }
+
+      for (int x = 0; x < totalTime; x++) {
+        for (int y = 0; y < width; y ++) {
+          g.drawRect(x * 60 + 50, y * 20 + 30, 60, 20);
+        }
+      }
+     // first += 220;
+
+
+    int y = 30;
+    Graphics cube = g.create();
+
+    for (int r = 0; r < curMusic.size(); r++) {
+      int x = 50;
+      int n1 = 0;
+
+      boolean hasRow;
+      if (curMusic.get(r).isEmpty()) {
+        hasRow = false;
+      } else {
+        hasRow = true;
+      }
+      for (int b = 0; b < totalTime; b++) {
+        if (n1 >= curMusic.get(r).size()) {
+          break;
+        }
+        Note curNote = curMusic.get(r).get(n1);
+
+        if (curNote.getStart() == b) {
+          cube.setColor(Color.black);
+          cube.drawRect(x, y, curNote.getDuration() * 15, 20);
+          cube.fillRect(x, y, curNote.getDuration() * 15, 20);
+          x += 15;
+        } else if (curNote.getStart() == b - 1) {
+          cube.setColor(Color.blue);
+          cube.drawRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          cube.fillRect(x, y, (curNote.getDuration() - 1) * 15, 20);
+          x += 15;
+          n1 += 1;
+        } else {
+          x += 15;
+        }
+      }
+
+      if (hasRow) {
+        y += 20;
+      }
+    }
+/*
+    ArrayList<Note> curTones = new ArrayList<>();
+
+    for (int h = 0; h < curMusic.size(); h++) {
+
+
+      if (curMusic.get(h).isEmpty()) {
+
+
+      } else {
+        Note tempTone = curMusic.get(h).get(0);
+        curTones.add(tempTone);
+      }
+    }
+
+
+    int j = 45;
+    for (Note n : curTones) {
+      String tone = n.getTone().getString();
+      String oct = Integer.toString(n.getOctave());
+      String tempStr = tone + oct;
+      g.drawString(tempStr, 25, j);
+      j += 20;
+    }*/
+
 
     int currO = minO;
     int currT = minT;
@@ -317,7 +322,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       String temp = Integer.toString(i);
       g.drawString(temp, 25, 50 + i);
     }
-    System.out.println(totalTime);
+ //   System.out.println(totalTime);
   }
 
   public void renderTones(IMusicModel m, Graphics g) {

@@ -18,7 +18,7 @@ import javax.sound.midi.InvalidMidiDataException;
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
     MusicReader mr = new MusicReader();
-    IMusicModel m = mr.parseFile(new FileReader("mystery-3.txt"), new MusicModelBuilder());
+    IMusicModel m = mr.parseFile(new FileReader("mary-little-lamb.txt"), new MusicModelBuilder());
   /*  m.write(Tone.G, 7, 3, 60, 4);
     m.write(Tone.E, 2, 4, 60, 4);
     m.advance();
