@@ -181,25 +181,38 @@ public class ConcreteGuiViewPanel extends JPanel {
 
 
     int totalTime = m.getTotalTime();
-    System.out.println(totalTime);
+   // System.out.println(totalTime);
     int first = 50;
-    for (int i = 0; i < totalTime; i += 16) {
+    for (int i = 0; i <= totalTime; i += 16) {
       String temp = Integer.toString(i);
       g.drawString(temp, 50 + (15 * i), 25);
       //first += 230;
     }
 
-      for (int x = 0; x < totalTime; x++) {
+      for (int x = 0; x < totalTime/4; x++) {
         for (int y = 0; y < width; y ++) {
           g.drawRect(x * 60 + 50, y * 20 + 30, 60, 20);
         }
       }
      // first += 220;
 
-
+    int x = 50;
     int y = 30;
     Graphics cube = g.create();
 
+    for (int a0 = 0; a0 < 12; a0++) {
+      len = curMusic.get(a0).size();
+      for (int a9 = 0; a9 < len; a9++) {
+        n = curMusic.get(a0).get(a9);
+        cube.setColor(Color.black);
+        y = 30 + (n.getTone().ordinal() + (n.getOctave() - minO) * 12) * 20;
+        x = 50 + n.getStart() * 15;
+        cube.drawRect(x, y, 15, 20);
+        cube.fillRect(x, y, 15, 20);
+      }
+    }
+
+    /*
     for (int r = 0; r < curMusic.size(); r++) {
       int x = 50;
       int n1 = 0;
@@ -235,7 +248,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       if (hasRow) {
         y += 20;
       }
-    }
+    }*/
 /*
     ArrayList<Note> curTones = new ArrayList<>();
 
@@ -262,8 +275,8 @@ public class ConcreteGuiViewPanel extends JPanel {
     }*/
 
 
-    int currO = minO;
-    int currT = minT;
+    int currO = maxO;
+    int currT = maxT;
     String tone="";
     String oct="";
     int border=45;
@@ -300,11 +313,11 @@ public class ConcreteGuiViewPanel extends JPanel {
 
       g.drawString(tone+oct, 25, border);
 
-      if (currT == 11) {
-        currT = 0;
-        currO++;
+      if (currT == 0) {
+        currT = 11;
+        currO--;
       }
-      else currT++;
+      else currT--;
       border+=20;
     }
 
@@ -312,7 +325,7 @@ public class ConcreteGuiViewPanel extends JPanel {
 
 
   }
-
+/*
   public void renderBeats(Graphics g) {
     super.paintComponent(g);
     List<List<Note>> curMusic = m.getMusic();
@@ -322,8 +335,8 @@ public class ConcreteGuiViewPanel extends JPanel {
       String temp = Integer.toString(i);
       g.drawString(temp, 25, 50 + i);
     }
- //   System.out.println(totalTime);
-  }
+    System.out.println(totalTime);
+  }*/
 
   public void renderTones(IMusicModel m, Graphics g) {
     super.paintComponent(g);
