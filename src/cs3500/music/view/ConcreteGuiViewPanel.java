@@ -189,11 +189,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       //first += 230;
     }
 
-      for (int x = 0; x < totalTime/4; x++) {
-        for (int y = 0; y < width; y ++) {
-          g.drawRect(x * 60 + 50, y * 20 + 30, 60, 20);
-        }
-      }
+
      // first += 220;
 
     int x = 50;
@@ -205,10 +201,20 @@ public class ConcreteGuiViewPanel extends JPanel {
       for (int a9 = 0; a9 < len; a9++) {
         n = curMusic.get(a0).get(a9);
         cube.setColor(Color.black);
-        y = 30 + (n.getTone().ordinal() + (n.getOctave() - minO) * 12) * 20;
+        y = 30 + ((maxO - n.getOctave()) * 12 + (maxT - n.getTone().ordinal())) * 20;
         x = 50 + n.getStart() * 15;
         cube.drawRect(x, y, 15, 20);
         cube.fillRect(x, y, 15, 20);
+
+        cube.setColor(Color.ORANGE);
+        cube.drawRect(x + 15, y, 15 * (n.getDuration() - 1), 20);
+        cube.fillRect(x + 15, y, 15 * (n.getDuration() - 1), 20);
+      }
+    }
+
+    for (x = 0; x < totalTime/4; x++) {
+      for (y = 0; y < width; y ++) {
+        g.drawRect(x * 60 + 50, y * 20 + 30, 60, 20);
       }
     }
 
