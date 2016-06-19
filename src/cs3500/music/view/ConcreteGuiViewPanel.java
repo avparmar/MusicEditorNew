@@ -374,5 +374,14 @@ public class ConcreteGuiViewPanel extends JPanel {
 
   //public void addSpace(IMusicModel m, Graphics g);
 
+  public int setWidth() {
+    return 5 * 15 + m.getTotalTime() * 15;
+
+  }
+
+  public int setHeight() {
+    return m.getMusic().size() * 15 + 5 * 15;
+  }
+
 
 }
