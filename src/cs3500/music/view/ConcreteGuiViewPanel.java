@@ -131,20 +131,20 @@ public class ConcreteGuiViewPanel extends JPanel {
     // and methods on it that may be useful
  //   this.initData();
     List<List<Note>> curMusic = m.getMusic();
-    ArrayList<ArrayList<Note>> arrCur = new ArrayList<>();
+/*    ArrayList<ArrayList<Note>> arrCur = new ArrayList<>();
 
-    for (int a = 0; a < curMusic.size(); a++) {
+    int len = curMusic.size();
+    for (int a = 0; a < len; a++) {
       arrCur.add(new ArrayList<>());
       for (int z = 0; z < arrCur.get(a).size(); z++) {
         arrCur.get(a).add((Note) curMusic.get(a).get(z));
       }
-    }
+    }*/
 
     int maxO = -1;
     int minO = 11;
     int maxT = 0;
     int minT = 11;
-
 
 
     int len;
@@ -322,6 +322,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       if (currT == 0) {
         currT = 11;
         currO--;
+  //      g.drawL
       }
       else currT--;
       border+=20;
@@ -343,13 +344,14 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
     System.out.println(totalTime);
   }*/
-
+/*
   public void renderTones(IMusicModel m, Graphics g) {
     super.paintComponent(g);
     List<List<Note>> curMusic = m.getMusic();
     ArrayList<Note> curTones = new ArrayList<>();
 
-    for (int i = 0; i < curMusic.size(); i++) {
+    int len = curMusic.size();
+    for (int i = 0; i < len; i++) {
       if (curMusic.get(i).isEmpty()) {
 
       } else {
@@ -368,7 +370,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       g.drawString(temp, 25, start + inc);
     }
 
-  }
+  }*/
 
   //public void addSpace(IMusicModel m, Graphics g);
 
