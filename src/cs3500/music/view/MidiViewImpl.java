@@ -11,9 +11,9 @@ import cs3500.music.model.Note;
  * A skeleton for MIDI playback
  */
 public class MidiViewImpl implements IView {
-  private final IMusicModel m;
-  private final Synthesizer synth;
-  private final Receiver receiver;
+  private  IMusicModel m;
+  private  Synthesizer synth;
+  private  Receiver receiver;
   private Instrument[] band;
 
 
@@ -21,7 +21,6 @@ public class MidiViewImpl implements IView {
     Synthesizer synth1;
     Receiver r1;
     this.m = m;
-
 
     try {
 
@@ -41,7 +40,52 @@ public class MidiViewImpl implements IView {
     synth = synth1;
     receiver = r1;
 
+  }
 
+  public MidiViewImpl(IMusicModel m, String s) {
+    if (s == "test") {
+      Synthesizer ms;
+      Receiver mr;
+      this.m = m;
+
+      try {
+
+        ms = new MockSynth(new StringBuilder());
+        mr = ms.getReceiver();
+
+      } catch (MidiUnavailableException e) {
+        e.printStackTrace();
+        ms = null;
+        mr = null;
+
+      }
+      synth = ms;
+      receiver = mr;
+
+    } else if (s == "reg") {
+      Synthesizer synth1;
+      Receiver r1;
+      this.m = m;
+
+      try {
+
+        synth1 = MidiSystem.getSynthesizer();
+        r1 = synth1.getReceiver();
+
+        synth1.open();
+
+        band = synth1.getAvailableInstruments();
+
+      } catch (MidiUnavailableException e) {
+        e.printStackTrace();
+        synth1 = null;
+        r1 = null;
+
+      }
+      synth = synth1;
+      receiver = r1;
+
+    }
   }
 
   /**
@@ -131,6 +175,10 @@ public class MidiViewImpl implements IView {
 
     this.receiver.close();
 
+  }
+
+  public Synthesizer getSynth() {
+    return this.synth;
   }
 
 }
