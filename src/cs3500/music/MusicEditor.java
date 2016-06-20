@@ -38,7 +38,6 @@ public class MusicEditor {
       case "midi":
         midiView = new MidiViewImpl(m);
         midiView.display();
-
       case "gui":
         guiView = new GuiViewFrame(m);
         guiView.initialize();
@@ -48,7 +47,6 @@ public class MusicEditor {
         System.out.print("Invaid view");
         break;
     }
-
 
 
   }

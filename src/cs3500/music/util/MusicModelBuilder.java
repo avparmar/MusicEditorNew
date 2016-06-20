@@ -64,34 +64,47 @@ public class MusicModelBuilder implements CompositionBuilder<IMusicModel> {
     Tone t;
 
     switch (pitch % 12) {
-      case 0: t = Tone.C;
+      case 0:
+        t = Tone.C;
         break;
-      case 1: t = Tone.Csharp;
+      case 1:
+        t = Tone.Csharp;
         break;
-      case 2: t = Tone.D;
+      case 2:
+        t = Tone.D;
         break;
-      case 3: t = Tone.Dsharp;
+      case 3:
+        t = Tone.Dsharp;
         break;
-      case 4: t = Tone.E;
+      case 4:
+        t = Tone.E;
         break;
-      case 5: t = Tone.F;
+      case 5:
+        t = Tone.F;
         break;
-      case 6: t = Tone.Fsharp;
+      case 6:
+        t = Tone.Fsharp;
         break;
-      case 7: t = Tone.G;
+      case 7:
+        t = Tone.G;
         break;
-      case 8: t = Tone.Gsharp;
+      case 8:
+        t = Tone.Gsharp;
         break;
-      case 9: t = Tone.A;
+      case 9:
+        t = Tone.A;
         break;
-      case 10: t = Tone.Asharp;
+      case 10:
+        t = Tone.Asharp;
         break;
-      case 11: t = Tone.B;
+      case 11:
+        t = Tone.B;
         break;
-      default: t = Tone.C;
+      default:
+        t = Tone.C;
     }
 
-    notes.add(new Note(t, end - start, pitch/12 - 1, start, volume, instrument));
+    notes.add(new Note(t, end - start, pitch / 12 - 1, start, volume, instrument));
     return this;
   }
 }

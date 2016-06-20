@@ -15,9 +15,15 @@ public class StringView implements IView {
     this.m = m;
   }
 
+  /**
+   * Gets the text view
+   *
+   * @return a string representing the text view
+   */
   public String getText() {
     return this.text;
   }
+
 
   @Override
   public void display() {

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+
 /**
  * represents a basic music model
  */
-public class MusicModel implements IMusicModel{
+public class MusicModel implements IMusicModel {
 
   private int time;
   private List<Queue<Note>> notes;
@@ -32,9 +33,9 @@ public class MusicModel implements IMusicModel{
   /**
    * constructs a note out of the things that determine how a note is
    *
-   * @param tone the tone of the note
+   * @param tone     the tone of the note
    * @param duration the duration, in beats, of the note
-   * @param octave the octave of the note
+   * @param octave   the octave of the note
    */
   public void write(Tone tone, int duration, int octave) {
     if (tone == null) throw new IllegalArgumentException("no null");
@@ -79,7 +80,9 @@ public class MusicModel implements IMusicModel{
     int p1 = oldNote.getTone().ordinal();
     int p2 = newNote.getTone().ordinal();
 
-    if (notes.get(p1).remove(oldNote)) { notes.get(p2).add(newNote); }
+    if (notes.get(p1).remove(oldNote)) {
+      notes.get(p2).add(newNote);
+    }
   }
 
   /**
@@ -91,9 +94,16 @@ public class MusicModel implements IMusicModel{
     if (totalSize == 0) throw new IllegalArgumentException("no");
 
     int place = note.getTone().ordinal();
-    if (notes.get(place).remove(note)) { totalSize--; }
+    if (notes.get(place).remove(note)) {
+      totalSize--;
+    }
   }
 
+  /**
+   * Returns the current song, as a 2D List of notes
+   *
+   * @return A 2D list of notes representing the current song
+   */
   public List<List<Note>> getMusic() {
     List<List<Note>> cc = new ArrayList<>();
 
@@ -106,7 +116,7 @@ public class MusicModel implements IMusicModel{
       Note n1;
 
       cc.add(new ArrayList<>());
-      for(int j = 0; j < len; j++) {
+      for (int j = 0; j < len; j++) {
         n1 = (Note) temp[j];
         n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(), n1.getVolume(), n1.getInstrument());
         cc.get(i).add(n);
@@ -137,7 +147,9 @@ public class MusicModel implements IMusicModel{
   /**
    * reduces the beat by one
    */
-  public void back() { time--; }
+  public void back() {
+    time--;
+  }
 
   /**
    * gets the current time
@@ -288,69 +300,78 @@ public class MusicModel implements IMusicModel{
 
     int wid = ("" + end).length();
     for (int s = 0; s < wid; s++) {
-      res+="═";
-      lastLineHolder+="═";
+      res += "═";
+      lastLineHolder += "═";
     }
 
 
     int width = (12 - minT) + (1 + maxT) + (12 * (maxO - minO - 1));
-    for(int a0 = 0; a0 < width; a0++) {
-      res+="═════";
-      lastLineHolder+="═════";
+    for (int a0 = 0; a0 < width; a0++) {
+      res += "═════";
+      lastLineHolder += "═════";
     }
-    res+="╗\n║";
-    lastLineHolder+="╝";
+    res += "╗\n║";
+    lastLineHolder += "╝";
 
     for (int s = 0; s < wid; s++) {
-      res+=" ";
+      res += " ";
     }
 
     int currO = minO;
     int currT = minT;
     for (int a1 = 0; a1 < width; a1++) {
-      if (currT==1 || currT==3 || currT==6 || currT==8 || currT==10) res+=" ";
-      else if (currO == 10) res+=" ";
-      else res+="  ";
+      if (currT == 1 || currT == 3 || currT == 6 || currT == 8 || currT == 10) res += " ";
+      else if (currO == 10) res += " ";
+      else res += "  ";
       switch (currT) {
-        case 0: res+= "C";
+        case 0:
+          res += "C";
           break;
-        case 1: res+= "C#";
+        case 1:
+          res += "C#";
           break;
-        case 2: res+= "D";
+        case 2:
+          res += "D";
           break;
-        case 3: res+= "D#";
+        case 3:
+          res += "D#";
           break;
-        case 4: res+= "E";
+        case 4:
+          res += "E";
           break;
-        case 5: res+= "F";
+        case 5:
+          res += "F";
           break;
-        case 6: res+= "F#";
+        case 6:
+          res += "F#";
           break;
-        case 7: res+= "G";
+        case 7:
+          res += "G";
           break;
-        case 8: res+= "G#";
+        case 8:
+          res += "G#";
           break;
-        case 9: res+= "A";
+        case 9:
+          res += "A";
           break;
-        case 10: res+= "A#";
+        case 10:
+          res += "A#";
           break;
-        case 11: res+= "B";
+        case 11:
+          res += "B";
           break;
       }
-      if ((currO == 10) && (currT==1 || currT==3 || currT==6 || currT==8 || currT==10)) res+="10";
-      else res+= currO + " ";
+      if ((currO == 10) && (currT == 1 || currT == 3 || currT == 6 || currT == 8 || currT == 10))
+        res += "10";
+      else res += currO + " ";
 
       if (currT == 11) {
         currT = 0;
         currO++;
-      }
-      else currT++;
+      } else currT++;
     }
 
-    res+= "║\n";
-
-
-
+    res += "║\n";
 
 
     int currBeat = 0;
@@ -364,13 +385,13 @@ public class MusicModel implements IMusicModel{
 
     int count = 0; // count notes processed
     while (count != totalSize) {
-      res+="║";
+      res += "║";
       if ((currBeat + "").length() < wid) {
         for (int d = (currBeat + "").length(); d < wid; d++) {
-          res+=" ";
+          res += " ";
         }
       }
-      res+="" + currBeat;
+      res += "" + currBeat;
 
       currO = minO;
       currT = minT;
@@ -384,32 +405,30 @@ public class MusicModel implements IMusicModel{
         for (int b = 0; b < len; b++) {
           n = cc.get(currT).get(b);
           if (n.getStart() <= currBeat &&
-                  n.getOctave() == currO && n.getStart() + n.getDuration() -1 >= currBeat) {
+                  n.getOctave() == currO && n.getStart() + n.getDuration() - 1 >= currBeat) {
             winner = true;
             if (n.getStart() == currBeat) {
               headCheck = true;
-            }
-            else tailCheck = true;
+            } else tailCheck = true;
           }
           if (n.getStart() + n.getDuration() == currBeat) {
             cc.get(currT).remove(b);
             count++;
             len--;
-            if (b > 1) b-=2;
+            if (b > 1) b -= 2;
             else b = -1;
           }
         }
-        if (headCheck) res+="  X  ";
-        if (!headCheck && tailCheck) res+= "  |  ";
-        if (!winner) res+= "     ";
+        if (headCheck) res += "  X  ";
+        if (!headCheck && tailCheck) res += "  |  ";
+        if (!winner) res += "     ";
         if (currT == 11) {
           currT = 0;
           currO++;
-        }
-        else currT++;
+        } else currT++;
       }
       currBeat++;
-      res+="║\n";
+      res += "║\n";
 
 
     }

@@ -5,9 +5,6 @@ package cs3500.music.model;
  */
 public class Note implements Comparable<Note> {
 
-  // an enumeration representing the tone of a note
-
-
   private Tone tone;
   private int duration;
   private int octave;
@@ -39,7 +36,7 @@ public class Note implements Comparable<Note> {
    * @param tone     the tone of the note
    * @param duration the duration, in beats, of the note
    * @param octave   the octave of the note
-   * @param volume the volume
+   * @param volume   the volume
    * @param start    the time the note will play
    */
   public Note(Tone tone, int duration, int octave, int start, int volume) {
@@ -57,7 +54,7 @@ public class Note implements Comparable<Note> {
    * @param tone     the tone of the note
    * @param duration the duration, in beats, of the note
    * @param octave   the octave of the note
-   * @param volume the volume
+   * @param volume   the volume
    * @param start    the time the note will play
    */
   public Note(Tone tone, int duration, int octave, int start, int volume, int instrument) {
@@ -76,7 +73,7 @@ public class Note implements Comparable<Note> {
   public boolean equals(Note that) {
     return this.tone.equals(that.tone) && this.duration == that.duration &&
             this.octave == that.octave && this.start == that.start;
-            //&& this.volume == that.volume;
+    //&& this.volume == that.volume;
   }
 
   @Override
@@ -105,7 +102,9 @@ public class Note implements Comparable<Note> {
     return tone;
   }
 
-  public int getVolume() { return volume; }
+  public int getVolume() {
+    return volume;
+  }
 
   public int getInstrument() {
     return instrument;

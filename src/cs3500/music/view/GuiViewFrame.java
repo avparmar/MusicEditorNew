@@ -24,9 +24,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
    */
   public GuiViewFrame(IMusicModel m) {
     this.displayPanel = new ConcreteGuiViewPanel(m);
-//    this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//    this.getContentPane().add(displayPanel);
-//    this.pack();
   }
 
   //  @Override
@@ -34,11 +31,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
     this.setVisible(true);
   }
 
-//  @Override
-//  public Dimension getPreferredSize() {
-//    return new Dimension(1500, 500);
-//  }
 
+  /**
+   * Displays the GUI view
+   */
   @Override
   public void display() {
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

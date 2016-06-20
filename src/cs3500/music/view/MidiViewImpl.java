@@ -15,24 +15,19 @@ public class MidiViewImpl implements IView {
   private final Synthesizer synth;
   private final Receiver receiver;
   private Instrument[] band;
-//  private final Sequencer sequencer;
- // private final Transmitter transmitter;
+
 
   public MidiViewImpl(IMusicModel m) {
     Synthesizer synth1;
     Receiver r1;
     this.m = m;
- //   Transmitter t1;
- //   Sequencer s1;
+
 
     try {
 
       synth1 = MidiSystem.getSynthesizer();
       r1 = synth1.getReceiver();
- //     s1 = MidiSystem.getSequencer();
-  //    t1 = s1.getTransmitter();
-//      t1.setReceiver(r1);
- //     s1.open();
+
       synth1.open();
 
       band = synth1.getAvailableInstruments();
@@ -41,20 +36,10 @@ public class MidiViewImpl implements IView {
       e.printStackTrace();
       synth1 = null;
       r1 = null;
- //     t1 = null;
- //     s1 = null;
 
     }
     synth = synth1;
     receiver = r1;
-//    transmitter = t1;
-  //  sequencer = s1;
- //   this.model = model;
- //   if (sequencer != null) {
-   //   sequencer.setTempoInMPQ(model.getTempo());
-//    }
-
-
 
 
   }
@@ -76,7 +61,7 @@ public class MidiViewImpl implements IView {
   public void playNote() throws InvalidMidiDataException {
     // shortmessage(state, ~~, pitch, volume)
 
-  //  sequencer.setTempoInMPQ(200000);
+    //  sequencer.setTempoInMPQ(200000);
     MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, 0, 64, 72);
     MidiMessage stop = new ShortMessage(ShortMessage.NOTE_OFF, 0, 64, 72);
     this.receiver.send(start, 0);
@@ -95,7 +80,6 @@ public class MidiViewImpl implements IView {
     this.receiver.send(start, 800000);
 
     this.receiver.send(stop, 1200000);
-
 
 
     this.receiver.close(); // Only call this once you're done playing *all* notes
@@ -141,16 +125,12 @@ public class MidiViewImpl implements IView {
           e.printStackTrace();
         }
 
-       // synth.unloadInstrument(band[34]);
+
       }
     }
 
     this.receiver.close();
 
   }
-
-  /**
-   * sets the tempo
-   */
 
 }

@@ -76,10 +76,10 @@ public interface IMusicModel {
   public int getTotalTime();
 
   public int getTempo();
+
   public void setTempo(int t);
 
   public void writeTime(Tone tone, int duration, int octave, int start, int volume, int instrument);
-
 
 
 }

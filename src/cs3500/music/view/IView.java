@@ -7,6 +7,9 @@ import cs3500.music.model.IMusicModel;
  */
 public interface IView {
 
+  /**
+   * Displays the view
+   */
   public void display();
 
 }
