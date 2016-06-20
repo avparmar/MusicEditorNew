@@ -25,19 +25,22 @@ public class MusicEditor {
     System.out.print("Enter the view to display: ");
     String view = init.nextLine();
     IMusicModel m = mr.parseFile(new FileReader(file), new MusicModelBuilder());
-    GuiViewFrame guiView = new GuiViewFrame(m);
-    StringView strView = new StringView(m);
-    MidiViewImpl midiView = new MidiViewImpl(m);
+    StringView strView = null;
+    GuiViewFrame guiView = null;
+    MidiViewImpl midiView = null;
 
     switch (view) {
       case "console":
+        strView = new StringView(m);
         strView.display();
         System.out.print(strView.getText());
         break;
       case "midi":
+        midiView = new MidiViewImpl(m);
         midiView.display();
-        break;
+
       case "gui":
+        guiView = new GuiViewFrame(m);
         guiView.initialize();
         guiView.display();
         break;
@@ -45,6 +48,8 @@ public class MusicEditor {
         System.out.print("Invaid view");
         break;
     }
+
+
 
   }
 }

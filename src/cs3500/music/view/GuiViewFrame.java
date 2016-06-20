@@ -43,9 +43,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
   public void display() {
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    this.displayPanel.setPreferredSize(new Dimension(displayPanel.setWidth(), displayPanel.setHeight()));
+    this.displayPanel.setPreferredSize(new Dimension(this.displayPanel.setWidth(),
+            this.displayPanel.setHeight()));
     JScrollPane scroll = new JScrollPane(displayPanel);
-    scroll.setPreferredSize(new Dimension(800, 750));
+    scroll.setPreferredSize(new Dimension(800, 400));
+    scroll.getHorizontalScrollBar();
+    scroll.getVerticalScrollBar();
     this.add(scroll);
     this.pack();
 

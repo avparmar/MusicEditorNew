@@ -380,7 +380,9 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   public int setHeight() {
-    return m.getMusic().size() * 15 + 5 * 15;
+    int x;
+    x = m.getMusic().size() * 100 + 5 * 15;
+    return x;
   }
 
 
