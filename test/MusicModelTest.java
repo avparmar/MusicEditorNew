@@ -923,7 +923,7 @@ public class MusicModelTest {
     MidiViewImpl midi = new MidiViewImpl(mm, "test");
     midi.display();
     Synthesizer s = midi.getSynth();
-    StringBuilder sb =
+    MockSynth ms = new MockSynth(new StringBuilder());
 
   }
 

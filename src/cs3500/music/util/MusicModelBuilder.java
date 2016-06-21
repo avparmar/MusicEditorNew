@@ -60,7 +60,8 @@ public class MusicModelBuilder implements CompositionBuilder<IMusicModel> {
    * @param volume     The volume (in the range [0, 127])
    */
   @Override
-  public CompositionBuilder<IMusicModel> addNote(int start, int end, int instrument, int pitch, int volume) {
+  public CompositionBuilder<IMusicModel> addNote(int start, int end, int instrument,
+                                                 int pitch, int volume) {
     Tone t;
 
     switch (pitch % 12) {
