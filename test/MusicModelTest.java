@@ -923,9 +923,20 @@ public class MusicModelTest {
     MidiViewImpl midi = new MidiViewImpl(mm, "test");
     midi.display();
     Synthesizer s = midi.getSynth();
-    MockSynth ms = new MockSynth(new StringBuilder());
+    assertEquals("Message: [B@3b192d32\n" +
+            "Message: [B@16f65612\n" +
+            "Message: [B@311d617d\n" +
+            "Message: [B@7c53a9eb\n" +
+            "Message: [B@ed17bee\n" +
+            "Message: [B@2a33fae0\n" +
+            "Message: [B@707f7052\n" +
+            "Message: [B@11028347\n" +
+            "Message: [B@14899482\n", midi.getSynth().toString());
+
 
   }
+
+
 
 
 
