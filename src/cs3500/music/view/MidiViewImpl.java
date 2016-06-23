@@ -52,6 +52,7 @@ public class MidiViewImpl implements IView {
 
         ms = new MockSynth(new StringBuilder());
         mr = ms.getReceiver();
+        band = MidiSystem.getSynthesizer().getAvailableInstruments();
 
       } catch (MidiUnavailableException e) {
         e.printStackTrace();
@@ -149,6 +150,7 @@ public class MidiViewImpl implements IView {
       for (int j = 0; j < len; j++) {
         n = cc.get(i).get(j);
         try {
+          Instrument[] iewf = band;
           synth.loadInstrument(band[n.getInstrument()]);
 
           insChange = new ShortMessage(ShortMessage.PROGRAM_CHANGE,

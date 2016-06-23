@@ -1,5 +1,3 @@
-package cs3500.music;
-
 import cs3500.music.model.IMusicModel;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.Tone;
@@ -9,6 +7,9 @@ import cs3500.music.view.GuiViewFrame;
 import cs3500.music.view.MidiViewImpl;
 import cs3500.music.view.StringView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,14 +18,20 @@ import javax.sound.midi.InvalidMidiDataException;
 
 
 public class MusicEditor {
-  public static void main(String[] args) throws IOException, InvalidMidiDataException {
+
+  public static void main(String[] args) {
     MusicReader mr = new MusicReader();
     Scanner init = new Scanner(System.in);
     System.out.print("Enter the file you want to play: ");
     String file = init.nextLine();
     System.out.print("Enter the view to display: ");
     String view = init.nextLine();
-    IMusicModel m = mr.parseFile(new FileReader(file), new MusicModelBuilder());
+    IMusicModel m = null;
+    try {
+      m = mr.parseFile(new FileReader(file), new MusicModelBuilder());
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
     StringView strView = null;
     GuiViewFrame guiView = null;
     MidiViewImpl midiView = null;

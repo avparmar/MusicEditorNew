@@ -18,9 +18,7 @@ public class MockRecv implements Receiver {
   public void send(MidiMessage message, long timeStamp) {
 
     String mMessage = message.getMessage().toString();
-    String mStatus = Integer.toString(message.getStatus());
-    String mTimeStamp = Long.toString(timeStamp);
-    this.s.append(mStatus + mMessage + mTimeStamp);
+    this.s.append("Message: " + mMessage + "\n");
 
   }
 

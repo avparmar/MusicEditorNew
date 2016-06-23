@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sound.midi.Instrument;
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiDevice;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Patch;
 import javax.sound.midi.Receiver;
@@ -106,7 +107,7 @@ public class MockSynth implements MidiDevice, Synthesizer {
 
   @Override
   public boolean loadInstrument(Instrument instrument) {
-    return false;
+    return true;
   }
 
   @Override
@@ -126,7 +127,13 @@ public class MockSynth implements MidiDevice, Synthesizer {
 
   @Override
   public Instrument[] getAvailableInstruments() {
-    return new Instrument[0];
+    try {
+      return MidiSystem.getSynthesizer().getAvailableInstruments();
+    } catch (MidiUnavailableException e) {
+      e.printStackTrace();
+      System.out.println("lol");
+      return null;
+    }
   }
 
   @Override
@@ -153,6 +160,9 @@ public class MockSynth implements MidiDevice, Synthesizer {
   public void unloadInstruments(Soundbank soundbank, Patch[] patchList) {
 
   }
+
+  @Override
+  public String toString() { return s.toString(); }
 
   public StringBuilder getStringBuilder() {
     return this.s;
