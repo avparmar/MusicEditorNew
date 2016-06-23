@@ -17,4 +17,6 @@ public interface GuiView extends IView {
   void addKeyListener(KeyListener listener);
 
   void addActionListener(ActionListener listener);
+
+  void panView(String s);
 }

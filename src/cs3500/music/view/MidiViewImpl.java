@@ -1,9 +1,11 @@
 package cs3500.music.view;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.sound.midi.*;
 
+import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 import cs3500.music.model.Note;
 
@@ -177,8 +179,33 @@ public class MidiViewImpl implements IView {
 
   }
 
-  public Synthesizer getSynth() {
+  @Override
+  public void addActionListener(ActionListener a) {
+
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener kbd) {
+
+  }
+
+  @Override
+  public void resetFocus() {
+
+  }
+
+  @Override
+  public String whatView() {
+    return "midi";
+  }
+
+  public Synthesizer getSynth()
+  {
     return this.synth;
   }
+
+
+
+
 
 }
