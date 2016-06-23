@@ -73,12 +73,33 @@ public interface IMusicModel {
    */
   public void advance();
 
+  /**
+   * Gets the total time of the song, in beats
+   * @return an int representing the total time of the song
+   */
   public int getTotalTime();
 
+  /**
+   * Gets the tempo of the song
+   * @return an int representing the tempo of the song
+   */
   public int getTempo();
 
+  /**
+   * Sets the tempo to the input
+   * @param t the input tempo
+   */
   public void setTempo(int t);
 
+  /**
+   * Writes a note at the specified time, accounting for editing in the song
+   * @param tone Tone of the note
+   * @param duration Duration of the note
+   * @param octave Octave of the note
+   * @param start Start time of the note
+   * @param volume Volume of the note
+   * @param instrument Instrument of the note
+   */
   public void writeTime(Tone tone, int duration, int octave, int start, int volume, int instrument);
 
 

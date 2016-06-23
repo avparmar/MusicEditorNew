@@ -118,7 +118,8 @@ public class MusicModel implements IMusicModel {
       cc.add(new ArrayList<>());
       for (int j = 0; j < len; j++) {
         n1 = (Note) temp[j];
-        n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(), n1.getVolume(), n1.getInstrument());
+        n = new Note(n1.getTone(), n1.getDuration(), n1.getOctave(), n1.getStart(),
+                n1.getVolume(), n1.getInstrument());
         cc.get(i).add(n);
       }
     }
@@ -226,7 +227,8 @@ public class MusicModel implements IMusicModel {
    * used to write a note at the specified time.
    */
 
-  public void writeTime(Tone tone, int duration, int octave, int start, int volume, int instrument) {
+  public void writeTime(Tone tone, int duration, int octave, int start, int volume,
+                        int instrument) {
     if (start < 0) throw new IllegalArgumentException("invalid time");
     int temp = time;
     time = start;

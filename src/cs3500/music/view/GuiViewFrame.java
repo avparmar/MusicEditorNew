@@ -1,6 +1,8 @@
 package cs3500.music.view;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener; // Possibly of interest for handling mouse events
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import cs3500.music.model.Note;
 /**
  * A skeleton Frame (i.e., a window) in Swing
  */
-public class GuiViewFrame extends javax.swing.JFrame implements IView {
+public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   private final ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
 
@@ -45,6 +47,15 @@ public class GuiViewFrame extends javax.swing.JFrame implements IView {
     scroll.getVerticalScrollBar();
     this.add(scroll);
     this.pack();
+
+  }
+
+  @Override
+  public void addActionListener(ActionListener listener) {
+
+  }
+
+  public void addKeyListener(KeyListener listener) {
 
   }
 

@@ -25,6 +25,8 @@ public class MockSynth implements MidiDevice, Synthesizer {
     this.s = s;
   }
 
+
+
   @Override
   public Info getDeviceInfo() {
     throw new IllegalArgumentException("Unsupported");
