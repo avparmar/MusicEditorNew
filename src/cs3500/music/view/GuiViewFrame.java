@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 import cs3500.music.model.Note;
 
@@ -55,8 +56,26 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   }
 
-  public void addKeyListener(KeyListener listener) {
+  @Override
+  public void panView(String s) {
 
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener kbd) {
+
+  }
+
+
+  @Override
+  public void resetFocus() {
+    this.setFocusable(true);
+    this.requestFocus();
+  }
+
+  @Override
+  public String whatView() {
+    return "gui";
   }
 
 }
