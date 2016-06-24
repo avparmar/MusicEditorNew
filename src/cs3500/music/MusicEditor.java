@@ -38,10 +38,6 @@ public class MusicEditor {
         strView.display();
         System.out.print(strView.getText());
         break;
-      case "midi":
-        midiView = new MidiViewImpl(m);
-        c = new Controller(m, midiView);
-        midiView.display();
       case "gui":
         guiView = new GuiViewFrame(m);
         c = new Controller(m, guiView);
@@ -50,8 +46,11 @@ public class MusicEditor {
         guiView.display();
         guiView.displayAddNote();
         break;
+      case "midi":
+        midiView = new MidiViewImpl(m);
+        c = new Controller(m, midiView);
+        midiView.display();
       default:
-        System.out.print("Invaid view");
         break;
     }
 
