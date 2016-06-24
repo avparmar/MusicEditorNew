@@ -27,9 +27,16 @@ public class Controller implements ActionListener {
 
   public Controller(IMusicModel m, IView v) {
     this.model = m;
-    this.view = v;
-    configureKeyBoardListener();
-    this.view.addActionListener(this);
+    String cur = v.whatView();
+    if (cur == "console") {
+      this.view = v;
+    } else {
+      GuiView g = (GuiView) v;
+      this.view = g;
+      configureKeyBoardListener();
+      this.view.addActionListener(this);
+    }
+    this.view.display();
   }
 
 
@@ -53,7 +60,6 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_RIGHT, new PageRight());
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
-
 
     KeyboardListener kbd = new KeyboardListener(this);
     kbd.setKeyTypedMap(keyTypes);
@@ -83,23 +89,9 @@ public class Controller implements ActionListener {
 
   class AddNote implements Runnable {
     public void run() {
-      String curView = view.whatView();
-      switch (curView) {
-        case "gui":
-          GuiView gui = (GuiView) view;
-          gui.displayAddNote();
-          break;
-        case "midi":
-          break;
-        case "combo":
-          GuiView combo = (GuiView) view;
-          combo.displayAddNote();
-          break;
-        default:
-          curView = "Invalid input";
-          break;
-      }
-
+      System.out.print("I got here");
+      GuiView g = (GuiView) view;
+      g.displayAddNote();
     }
   }
 

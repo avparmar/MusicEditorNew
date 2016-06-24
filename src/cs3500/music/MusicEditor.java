@@ -6,6 +6,7 @@ import cs3500.music.model.MusicModel;
 import cs3500.music.model.Tone;
 import cs3500.music.util.MusicModelBuilder;
 import cs3500.music.util.MusicReader;
+import cs3500.music.view.CompositeView;
 import cs3500.music.view.GuiViewFrame;
 import cs3500.music.view.MidiViewImpl;
 import cs3500.music.view.StringView;
@@ -29,33 +30,36 @@ public class MusicEditor {
     StringView strView = null;
     GuiViewFrame guiView = null;
     MidiViewImpl midiView = null;
+    CompositeView compositeView = null;
     Controller c;
 
     switch (view) {
       case "console":
         strView = new StringView(m);
         c = new Controller(m, strView);
-        strView.display();
+
         System.out.print(strView.getText());
         break;
       case "gui":
         guiView = new GuiViewFrame(m);
         c = new Controller(m, guiView);
 
-        guiView.initialize();
-        guiView.display();
-        guiView.displayAddNote();
         break;
       case "midi":
         midiView = new MidiViewImpl(m);
         c = new Controller(m, midiView);
-        midiView.display();
+
         try {
           Thread.sleep(m.getTotalTime() * 200);
         } catch (InterruptedException e) {
           Thread.currentThread().interrupt();
         }
         break;
+      case "composite":
+        guiView = new GuiViewFrame(m);
+        midiView = new MidiViewImpl(m);
+        compositeView = new CompositeView(guiView, midiView);
+        c = new Controller(m, compositeView);
       default:
         System.out.print("Invaid view");
         break;

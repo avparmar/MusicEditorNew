@@ -170,6 +170,16 @@ public class ConcreteGuiViewPanel extends JPanel {
       border += 20;
     }
 
+    Graphics line = g.create();
+
+    line.setColor(Color.red);
+
+
+    line.drawRect(50, 30, 1, border - 42);
+    line.fillRect(50, 30, 1, border - 42);
+
+
+
 
   }
 
@@ -193,6 +203,10 @@ public class ConcreteGuiViewPanel extends JPanel {
     int x;
     x = m.getMusic().size() * 100 + 5 * 15;
     return x;
+  }
+
+  public void updatePanel() {
+
   }
 
 

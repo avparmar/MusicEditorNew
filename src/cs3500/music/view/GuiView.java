@@ -22,4 +22,8 @@ public interface GuiView extends IView {
 
   void displayRemoveNote();
   void displayAddNote();
+
+  void displayLine();
+
+  ConcreteGuiViewPanel getPanel();
 }

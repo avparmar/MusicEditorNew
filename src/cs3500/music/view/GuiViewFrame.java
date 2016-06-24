@@ -18,7 +18,7 @@ import cs3500.music.model.Note;
  */
 public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
-  private final ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
+  protected ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
 
   /**
    * Creates new GuiView
@@ -67,42 +67,40 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   public void displayRemoveNote() {
 
 
-
-
   }
 
   @Override
   public void displayAddNote() {
-      JFrame temp = new JFrame();
-      JPanel main = new JPanel();
-      main.setLayout(new FlowLayout());
-      JPanel t = new JPanel();
-      t.add(new JLabel("Pick a tone: "));
-      DefaultComboBoxModel options = new DefaultComboBoxModel();
-      options.addElement("C");
-      options.addElement("C#");
-      options.addElement("D");
-      options.addElement("D#");
-      options.addElement("E");
-      options.addElement("F");
-      options.addElement("F#");
-      options.addElement("G");
-      options.addElement("G#");
-      options.addElement("A");
-      options.addElement("A#");
-      options.addElement("B");
-      JComboBox combo = new JComboBox(options);
-      t.add(combo);
-      JPanel o = new JPanel();
-      o.add(new JLabel("Input an Octave: "));
-      JTextField text1 = new JTextField();
-      text1.setColumns(5);
-      o.add(text1);
-      JPanel b = new JPanel();
-      b.add(new JLabel("Input number of beats: "));
-      JTextField text2 = new JTextField();
-      text2.setColumns(5);
-      b.add(text2);
+    JFrame temp = new JFrame();
+    JPanel main = new JPanel();
+    main.setLayout(new FlowLayout());
+    JPanel t = new JPanel();
+    t.add(new JLabel("Pick a tone: "));
+    DefaultComboBoxModel options = new DefaultComboBoxModel();
+    options.addElement("C");
+    options.addElement("C#");
+    options.addElement("D");
+    options.addElement("D#");
+    options.addElement("E");
+    options.addElement("F");
+    options.addElement("F#");
+    options.addElement("G");
+    options.addElement("G#");
+    options.addElement("A");
+    options.addElement("A#");
+    options.addElement("B");
+    JComboBox combo = new JComboBox(options);
+    t.add(combo);
+    JPanel o = new JPanel();
+    o.add(new JLabel("Input an Octave: "));
+    JTextField text1 = new JTextField();
+    text1.setColumns(5);
+    o.add(text1);
+    JPanel b = new JPanel();
+    b.add(new JLabel("Input number of beats: "));
+    JTextField text2 = new JTextField();
+    text2.setColumns(5);
+    b.add(text2);
     JPanel v = new JPanel();
     v.add(new JLabel("Input volume: "));
     JTextField text3 = new JTextField();
@@ -113,15 +111,25 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     JTextField text4 = new JTextField();
     text4.setColumns(5);
     i.add(text4);
-      main.add(v);
-      main.add(i);
-      main.add(b);
-      main.add(t);
-      main.add(o);
-      temp.add(main);
+    main.add(v);
+    main.add(i);
+    main.add(b);
+    main.add(t);
+    main.add(o);
+    temp.add(main);
 
-      temp.setSize(new Dimension(500, 200));
-      temp.setVisible(true);
+    temp.setSize(new Dimension(500, 200));
+    temp.setVisible(true);
+  }
+
+  @Override
+  public void displayLine() {
+
+  }
+
+  @Override
+  public ConcreteGuiViewPanel getPanel() {
+    return this.displayPanel;
   }
 
   @Override
