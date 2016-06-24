@@ -43,10 +43,6 @@ public class StringView implements IView {
 
   }
 
-  /**
-   * Reset the focus on the appropriate part of the view that has the keyboard listener attached to
-   * it, so that keyboard events will still flow through.
-   */
   @Override
   public void resetFocus() {
 
@@ -54,7 +50,7 @@ public class StringView implements IView {
 
   @Override
   public String whatView() {
-    return null;
+    return "console";
   }
 
 }
