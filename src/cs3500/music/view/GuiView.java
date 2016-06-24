@@ -19,4 +19,7 @@ public interface GuiView extends IView {
   void addActionListener(ActionListener listener);
 
   void panView(String s);
+
+  void displayRemoveNote();
+  void displayAddNote();
 }

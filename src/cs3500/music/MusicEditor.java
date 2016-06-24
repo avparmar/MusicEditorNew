@@ -1,5 +1,6 @@
 package cs3500.music;
 
+import cs3500.music.controller.Controller;
 import cs3500.music.model.IMusicModel;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.Tone;
@@ -28,20 +29,26 @@ public class MusicEditor {
     StringView strView = null;
     GuiViewFrame guiView = null;
     MidiViewImpl midiView = null;
+    Controller c;
 
     switch (view) {
       case "console":
         strView = new StringView(m);
+        c = new Controller(m, strView);
         strView.display();
         System.out.print(strView.getText());
         break;
       case "midi":
         midiView = new MidiViewImpl(m);
+        c = new Controller(m, midiView);
         midiView.display();
       case "gui":
         guiView = new GuiViewFrame(m);
+        c = new Controller(m, guiView);
+
         guiView.initialize();
         guiView.display();
+        guiView.displayAddNote();
         break;
       default:
         System.out.print("Invaid view");

@@ -20,12 +20,17 @@ public class Controller implements ActionListener {
   private IMusicModel model;
   private IView view;
 
+  public Controller() {
+
+  }
+
   public Controller(IMusicModel m, IView v) {
     this.model = m;
     this.view = v;
     configureKeyBoardListener();
     this.view.addActionListener(this);
   }
+
 
 
   public void configureKeyBoardListener() {
@@ -59,11 +64,28 @@ public class Controller implements ActionListener {
   class RemoveNote implements Runnable {
     public void run() {
 
+
     }
   }
 
   class AddNote implements Runnable {
     public void run() {
+      String curView = view.whatView();
+      switch (curView) {
+        case "gui":
+          GuiView gui = (GuiView) view;
+          gui.displayAddNote();
+          break;
+        case "midi":
+          break;
+        case "combo":
+          GuiView combo = (GuiView) view;
+          combo.displayAddNote();
+          break;
+        default:
+          curView = "Invalid input";
+          break;
+      }
 
     }
   }
