@@ -50,7 +50,14 @@ public class MusicEditor {
         midiView = new MidiViewImpl(m);
         c = new Controller(m, midiView);
         midiView.display();
+        try {
+          Thread.sleep(m.getTotalTime() * 200);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+        break;
       default:
+        System.out.print("Invaid view");
         break;
     }
 
