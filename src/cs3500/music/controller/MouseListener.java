@@ -9,9 +9,10 @@ import java.util.Map;
 public class MouseListener implements java.awt.event.MouseListener {
 
   private Map<MouseEvent, Runnable> mouseClickedMap;
+  private Controller c;
 
-  public MouseListener() {
-
+  public MouseListener(Controller c) {
+    this.c = c;
   }
 
   @Override
@@ -19,7 +20,7 @@ public class MouseListener implements java.awt.event.MouseListener {
     Integer x = e.getXOnScreen();
     Integer y = e.getYOnScreen();
 
-
+    if (c.getMode() != null) c.getMode().run();
 
   }
 

@@ -19,6 +19,7 @@ public class Controller implements ActionListener {
 
   private IMusicModel model;
   private IView view;
+  private Runnable mode;
 
   public Controller() {
 
@@ -31,6 +32,14 @@ public class Controller implements ActionListener {
     this.view.addActionListener(this);
   }
 
+
+  public void setMode(Runnable r) {
+    mode = r;
+  }
+
+  public Runnable getMode() {
+    return mode;
+  }
 
 
   public void configureKeyBoardListener() {
@@ -46,12 +55,16 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
 
 
-    KeyboardListener kbd = new KeyboardListener();
+    KeyboardListener kbd = new KeyboardListener(this);
     kbd.setKeyTypedMap(keyTypes);
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);
 
     view.addKeyListener(kbd);
+
+  }
+
+  public void configureMouseListener() {
 
   }
 
