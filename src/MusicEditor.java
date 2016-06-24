@@ -42,18 +42,19 @@ public class MusicEditor {
         strView.display();
         System.out.print(strView.getText());
         break;
-      case "midi":
-        midiView = new MidiViewImpl(m);
-        midiView.display();
       case "gui":
         guiView = new GuiViewFrame(m);
         guiView.initialize();
         guiView.display();
         break;
+      case "midi":
+        midiView = new MidiViewImpl(m);
+        midiView.display();
       default:
-        System.out.print("Invaid view");
         break;
     }
+
+
 
 
   }

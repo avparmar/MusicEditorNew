@@ -1,5 +1,8 @@
 package cs3500.music.view;
 
+import java.awt.event.ActionListener;
+
+import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 
 /**
@@ -28,6 +31,30 @@ public class StringView implements IView {
   @Override
   public void display() {
     this.text = m.toString();
+  }
+
+  @Override
+  public void addActionListener(ActionListener a) {
+
+  }
+
+  @Override
+  public void addKeyListener(KeyboardListener kbd) {
+
+  }
+
+  /**
+   * Reset the focus on the appropriate part of the view that has the keyboard listener attached to
+   * it, so that keyboard events will still flow through.
+   */
+  @Override
+  public void resetFocus() {
+
+  }
+
+  @Override
+  public String whatView() {
+    return null;
   }
 
 }
