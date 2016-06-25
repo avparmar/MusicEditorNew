@@ -36,6 +36,7 @@ public class CompositeView implements GuiView {
 
   @Override
   public void updatePanel(IMusicModel m) {
+    gui.updatePanel(m);
 
   }
 
