@@ -19,8 +19,11 @@ public class MouseListener implements java.awt.event.MouseListener {
   public void mouseClicked(MouseEvent e) {
     Integer x = e.getXOnScreen();
     Integer y = e.getYOnScreen();
-
-    if (c.getMode() != null) c.getMode().run();
+    System.out.println("mouse");
+    if (c.getMode() != null) {
+      System.out.println("mouseCheck");
+      c.getMode().run();
+    }
 
   }
 

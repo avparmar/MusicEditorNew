@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by brendanreed on 6/21/16.
+ * Created by brendanreed on 6/21/16
  */
 public class Controller implements ActionListener {
 
@@ -21,21 +21,30 @@ public class Controller implements ActionListener {
   private IView view;
   private Runnable mode;
 
+  private KeyListener kl;
+  private MouseListener ml;
+
   public Controller() {
 
   }
 
   public Controller(IMusicModel m, IView v) {
     this.model = m;
-    String cur = v.whatView();
-    if (cur == "console") {
-      this.view = v;
-    } else {
+//    String cur = v.whatView();
+ //   if (cur == "console") {
+ //     this.view = v;
+ //   }
+  //  else if (cur.equals("gui")){
       GuiView g = (GuiView) v;
-      this.view = g;
+
+
       configureKeyBoardListener();
+      configureMouseListener();
+      g.getPanel().addKeyListener(kl);
+      g.getPanel().addMouseListener(ml);
+      this.view = g;
       this.view.addActionListener(this);
-    }
+ //   }
     this.view.display();
   }
 
@@ -65,13 +74,22 @@ public class Controller implements ActionListener {
     kbd.setKeyTypedMap(keyTypes);
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);
-
-    view.addKeyListener(kbd);
+    this.kl = kbd;
 
   }
 
   public void configureMouseListener() {
+    MouseListener ml = new MouseListener(this);
+    this.ml = ml;
 
+  }
+
+  public KeyListener getKeyListener() {
+    return kl;
+  }
+
+  public MouseListener getMouseListener() {
+    return ml;
   }
 
 

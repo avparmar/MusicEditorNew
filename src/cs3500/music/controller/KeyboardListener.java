@@ -51,6 +51,7 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
+    System.out.println("keyTyped");
     if (keyTypedMap.containsKey(e.getKeyChar()))
       c.setMode(keyTypedMap.get(e.getKeyChar()));
   }
@@ -62,6 +63,8 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
+    System.out.println("keyTyped");
+
     if (keyPressedMap.containsKey(e.getKeyCode()))
       c.setMode(keyTypedMap.get(e.getKeyChar()));
   }
@@ -73,6 +76,8 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
+    System.out.println("keyTyped");
+
     if (keyReleasedMap.containsKey(e.getKeyCode()))
       c.setMode(keyTypedMap.get(e.getKeyChar()));
   }
