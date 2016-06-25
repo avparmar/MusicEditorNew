@@ -2,7 +2,6 @@ package cs3500.music.view;
 
 import java.awt.event.ActionListener;
 
-import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 
 /**
@@ -44,7 +43,7 @@ public class StringView implements IView {
   }*/
 
   /*@Override
-  public void addKeyListener(KeyboardListener kbd) {
+  public void addKeyListener(KeyboardHandler kbd) {
 
   }*/
 

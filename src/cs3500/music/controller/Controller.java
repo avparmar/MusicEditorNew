@@ -4,18 +4,13 @@ import cs3500.music.model.IMusicModel;
 import cs3500.music.view.CompositeView;
 import cs3500.music.view.GuiView;
 import cs3500.music.view.IView;
-import cs3500.music.controller.KeyboardListener;
-import cs3500.music.view.MidiViewImpl;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -126,12 +121,14 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_RIGHT, new PageRight());
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
+    keyPresses.put(KeyEvent.VK_HOME, new PanHome());
+    keyPresses.put(KeyEvent.VK_END, new PanEnd());
 
     keyPresses.put(KeyEvent.VK_P, new PlaySong());
     keyPresses.put(KeyEvent.VK_SPACE, new PauseSong());
 
 
-    KeyboardListener kbd = new KeyboardListener(this);
+    KeyboardHandler kbd = new KeyboardHandler(this);
     kbd.setKeyTypedMap(keyTypes);
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);

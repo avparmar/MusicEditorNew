@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.sound.midi.*;
 
-import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 import cs3500.music.model.Note;
 
@@ -188,7 +187,7 @@ public class MidiViewImpl implements IView {
 
 
  /* @Override
-  public void addKeyListener(KeyboardListener kbd) {
+  public void addKeyListener(KeyboardHandler kbd) {
 
   }*/
 
