@@ -15,6 +15,9 @@ import java.util.Map;
 
 import javax.swing.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by brendanreed on 6/21/16
  */
@@ -23,6 +26,7 @@ public class Controller implements ActionListener {
   private IMusicModel model;
   private IView view;
   private Runnable mode;
+  private Timer timer;
 
   private KeyListener kl;
   private MouseListener ml;
@@ -57,6 +61,7 @@ public class Controller implements ActionListener {
       this.view = g;
  //     this.view.addActionListener(this);
  //   }
+    this.timer = new Timer();
     this.view.display();
 
   }
@@ -84,6 +89,7 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
     keyPresses.put(KeyEvent.VK_P, new PlaySong());
+    keyPresses.put(KeyEvent.VK_SPACE, new PauseSong());
 
     KeyboardListener kbd = new KeyboardListener(this);
     kbd.setKeyTypedMap(keyTypes);
@@ -116,15 +122,47 @@ public class Controller implements ActionListener {
   class PlaySong implements Runnable {
     public void run() {
       int totalTime = model.getTotalTime();
-
-      for (int i = 0; i < totalTime; i++) {
-        view.updatePanel(model);
-
-      }
-
+      Timer temp = new Timer();
+      timer = temp;
+      timer.schedule(new Play(), model.getCurrentTime(), totalTime);
 
     }
   }
+
+  class PauseSong implements Runnable {
+    public void run() {
+      timer.cancel();
+    }
+  }
+
+  class Play extends TimerTask {
+
+    @Override
+    public void run() {
+      view.updatePanel(model);
+    }
+  }
+
+  class PanHome implements Runnable {
+    public void run() {
+      int totalTime = model.getTotalTime();
+      Timer temp = new Timer();
+      timer = temp;
+      timer.schedule(new Play(), 0, totalTime);
+
+    }
+  }
+
+  class PanEnd implements Runnable {
+    public void run() {
+      int totalTime = model.getTotalTime();
+      Timer temp = new Timer();
+      timer = temp;
+      timer.schedule(new Play(), totalTime - 5, totalTime);
+    }
+  }
+
+
 
   class RemoveNote implements Runnable {
     public void run() {
