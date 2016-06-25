@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.*;
+
 /**
  * Created by brendanreed on 6/21/16
  */
@@ -40,13 +42,20 @@ public class Controller implements ActionListener {
 
 
       configureKeyBoardListener();
- //     configureMouseListener();
+      configureMouseListener();
+
 
       g.getPanel().addKeyListener(kl);
 
-  //    g.getPanel().addMouseListener(ml);
+
+      g.getPanel().addMouseListener(ml);
+
+    g.getPanel().setFocusable(true);
+    g.getPanel().requestFocus();
+
+ //   System.out.println(g.getPanel().getKeyListeners()[0]);
       this.view = g;
-      this.view.addActionListener(this);
+ //     this.view.addActionListener(this);
  //   }
     this.view.display();
   }
@@ -73,10 +82,10 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
 
-    KeyListener kbd = new KeyboardListener(this);
- //   kbd.setKeyTypedMap(keyTypes);
-//    kbd.setKeyPressedMap(keyPresses);
-  //  kbd.setKeyReleasedMap(keyReleases);
+    KeyboardListener kbd = new KeyboardListener(this);
+    kbd.setKeyTypedMap(keyTypes);
+    kbd.setKeyPressedMap(keyPresses);
+    kbd.setKeyReleasedMap(keyReleases);
     this.kl = kbd;
 
   }
