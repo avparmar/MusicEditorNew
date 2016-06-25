@@ -1,9 +1,11 @@
 package cs3500.music.controller;
 
 import cs3500.music.model.IMusicModel;
+import cs3500.music.view.CompositeView;
 import cs3500.music.view.GuiView;
 import cs3500.music.view.IView;
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.view.MidiViewImpl;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,11 +35,12 @@ public class Controller implements ActionListener {
 
   public Controller(IMusicModel m, IView v) {
     this.model = m;
-//    String cur = v.whatView();
+    String cur = v.whatView();
  //   if (cur == "console") {
  //     this.view = v;
  //   }
   //  else if (cur.equals("gui")){
+    if (cur.equals("gui")) {
       GuiView g = (GuiView) v;
 
 
@@ -50,21 +53,49 @@ public class Controller implements ActionListener {
 
       g.getPanel().addMouseListener(ml);
 
-    g.getPanel().setFocusable(true);
-    g.getPanel().requestFocus();
+      g.getPanel().setFocusable(true);
+      g.getPanel().requestFocus();
 
- //   System.out.println(g.getPanel().getKeyListeners()[0]);
+      //   System.out.println(g.getPanel().getKeyListeners()[0]);
       this.view = g;
- //     this.view.addActionListener(this);
- //   }
-    this.view.display();
+      //     this.view.addActionListener(this);
+      //   }
+      this.view.display();
+    }
+    else if (cur.equals("composite")) {
+      CompositeView cv = (CompositeView) v;
 
+      configureMouseListener();
+      configureKeyBoardListener();
+
+      cv.getPanel().addKeyListener(kl);
+      cv.getPanel().addMouseListener(ml);
+
+      cv.getPanel().setFocusable(true);
+      cv.getPanel().requestFocus();
+      this.view = cv;
+      this.view.display();
+    }
+
+    else if (cur.equals("midi")) {
+      System.out.print("5");
+  //    MidiViewImpl mv = new MidiViewImpl(m);
+  //    mv.display();
+      this.view = v;
+
+      this.view.display();
+
+      try {
+        Thread.sleep(m.getTotalTime() * 200);
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
+    }
   }
 
 
   public void setMode(Runnable r) {
     mode = r;
-    this.mode.run();
   }
 
   public Runnable getMode() {
@@ -83,7 +114,6 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_RIGHT, new PageRight());
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
-    keyPresses.put(KeyEvent.VK_P, new PlaySong());
 
     KeyboardListener kbd = new KeyboardListener(this);
     kbd.setKeyTypedMap(keyTypes);
@@ -113,23 +143,8 @@ public class Controller implements ActionListener {
 
   }
 
-  class PlaySong implements Runnable {
-    public void run() {
-      int totalTime = model.getTotalTime();
-
-      for (int i = 0; i < totalTime; i++) {
-        view.updatePanel(model);
-
-      }
-
-
-    }
-  }
-
   class RemoveNote implements Runnable {
     public void run() {
-      view.displayRemoveNote();
-
 
 
     }
@@ -137,27 +152,54 @@ public class Controller implements ActionListener {
 
   class AddNote implements Runnable {
     public void run() {
+      System.out.print("I got here");
       view.displayAddNote();
-
-
+      GuiView g = (GuiView) view;
+      g.displayAddNote();
     }
   }
 
   class PageLeft implements Runnable {
     public void run() {
-
       String pan = "left";
-      view.panView(pan);
-
+      String curView = view.whatView();
+      switch (curView) {
+        case "gui":
+          GuiView gui = (GuiView) view;
+          gui.panView(pan);
+          break;
+        case "midi":
+          break;
+        case "combo":
+          GuiView combo = (GuiView) view;
+          combo.panView(pan);
+          break;
+        default:
+          curView = "Invalid input";
+          break;
       }
     }
-
+  }
 
   class PageRight implements Runnable {
     public void run() {
       String pan = "right";
-
-      view.panView(pan);
+      String curView = view.whatView();
+      switch (curView) {
+        case "gui":
+          GuiView gui = (GuiView) view;
+          gui.panView(pan);
+          break;
+        case "midi":
+          break;
+        case "combo":
+          GuiView combo = (GuiView) view;
+          combo.panView(pan);
+          break;
+        default:
+          curView = "Invalid input";
+          break;
+      }
 
     }
   }
@@ -165,8 +207,22 @@ public class Controller implements ActionListener {
   class PageUp implements Runnable {
     public void run() {
       String pan = "up";
-      view.panView(pan);
-
+      String curView = view.whatView();
+      switch (curView) {
+        case "gui":
+          GuiView gui = (GuiView) view;
+          gui.panView(pan);
+          break;
+        case "midi":
+          break;
+        case "combo":
+          GuiView combo = (GuiView) view;
+          combo.panView(pan);
+          break;
+        default:
+          curView = "Invalid input";
+          break;
+      }
 
     }
   }
@@ -174,8 +230,22 @@ public class Controller implements ActionListener {
   class PageDown implements Runnable {
     public void run() {
       String pan = "down";
-      view.panView(pan);
-
+      String curView = view.whatView();
+      switch (curView) {
+        case "gui":
+          GuiView gui = (GuiView) view;
+          gui.panView(pan);
+          break;
+        case "midi":
+          break;
+        case "combo":
+          GuiView combo = (GuiView) view;
+          combo.panView(pan);
+          break;
+        default:
+          curView = "Invalid input";
+          break;
+      }
 
     }
   }
