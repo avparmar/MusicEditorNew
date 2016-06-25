@@ -207,17 +207,14 @@ public class Controller implements ActionListener {
 
   class RemoveNote implements Runnable {
     public void run() {
-
+      view.displayRemoveNote();
 
     }
   }
 
   class AddNote implements Runnable {
     public void run() {
-      System.out.print("I got here");
       view.displayAddNote();
-      GuiView g = (GuiView) view;
-      g.displayAddNote();
     }
   }
 
