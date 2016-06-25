@@ -23,9 +23,11 @@ import cs3500.music.model.Tone;
 public class ConcreteGuiViewPanel extends JPanel {
 
   private IMusicModel m; //= new MusicModel();
+  private int beat;
 
   public ConcreteGuiViewPanel(IMusicModel m) {
     this.m = m;
+    this.beat = 0;
   }
 
 
@@ -177,8 +179,8 @@ public class ConcreteGuiViewPanel extends JPanel {
     line.setColor(Color.red);
 
 
-    line.drawRect(50, 30, 1, border - 42);
-    line.fillRect(50, 30, 1, border - 42);
+    line.drawRect(50 + (beat * 15), 30, 1, border - +42);
+    line.fillRect(50 + (beat * 15), 30, 1, border - +42);
 
 
 
@@ -205,6 +207,11 @@ public class ConcreteGuiViewPanel extends JPanel {
     int x;
     x = m.getMusic().size() * 100 + 5 * 15;
     return x;
+  }
+
+  public void updateBeat() {
+    this.beat += 1;
+    this.repaint();
   }
 
   public void updatePanel() {

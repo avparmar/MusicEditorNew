@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import cs3500.music.controller.KeyboardListener;
+import cs3500.music.model.IMusicModel;
 
 /**
  * Created by brendanreed on 6/22/16.
@@ -77,9 +78,11 @@ public class CompositeView implements GuiView {
   }
 
   @Override
-  public void updatePanel() {
+  public void updatePanel(IMusicModel m) {
 
   }
+
+
 
 
   public void addKeyListener(KeyboardListener kbd) {

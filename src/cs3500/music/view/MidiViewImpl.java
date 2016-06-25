@@ -213,6 +213,21 @@ public class MidiViewImpl implements IView {
 
   }
 
+  @Override
+  public void displayRemoveNote() {
+
+  }
+
+  @Override
+  public void updatePanel(IMusicModel m) {
+
+  }
+
+  @Override
+  public void panView(String pan) {
+
+  }
+
   public Synthesizer getSynth()
   {
     return this.synth;

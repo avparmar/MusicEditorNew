@@ -30,4 +30,10 @@ public interface IView {
   String whatView();
 
   void displayAddNote();
+
+  void displayRemoveNote();
+
+  void updatePanel(IMusicModel m);
+
+  void panView(String pan);
 }

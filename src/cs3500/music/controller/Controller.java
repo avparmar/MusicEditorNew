@@ -58,11 +58,13 @@ public class Controller implements ActionListener {
  //     this.view.addActionListener(this);
  //   }
     this.view.display();
+
   }
 
 
   public void setMode(Runnable r) {
     mode = r;
+    this.mode.run();
   }
 
   public Runnable getMode() {
@@ -81,6 +83,7 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_RIGHT, new PageRight());
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
+    keyPresses.put(KeyEvent.VK_P, new PlaySong());
 
     KeyboardListener kbd = new KeyboardListener(this);
     kbd.setKeyTypedMap(keyTypes);
@@ -110,8 +113,23 @@ public class Controller implements ActionListener {
 
   }
 
+  class PlaySong implements Runnable {
+    public void run() {
+      int totalTime = model.getTotalTime();
+
+      for (int i = 0; i < totalTime; i++) {
+        view.updatePanel(model);
+
+      }
+
+
+    }
+  }
+
   class RemoveNote implements Runnable {
     public void run() {
+      view.displayRemoveNote();
+
 
 
     }
@@ -119,54 +137,27 @@ public class Controller implements ActionListener {
 
   class AddNote implements Runnable {
     public void run() {
-      System.out.print("I got here");
       view.displayAddNote();
-      GuiView g = (GuiView) view;
-      g.displayAddNote();
+
+
     }
   }
 
   class PageLeft implements Runnable {
     public void run() {
+
       String pan = "left";
-      String curView = view.whatView();
-      switch (curView) {
-        case "gui":
-          GuiView gui = (GuiView) view;
-          gui.panView(pan);
-          break;
-        case "midi":
-          break;
-        case "combo":
-          GuiView combo = (GuiView) view;
-          combo.panView(pan);
-          break;
-        default:
-          curView = "Invalid input";
-          break;
+      view.panView(pan);
+
       }
     }
-  }
+
 
   class PageRight implements Runnable {
     public void run() {
       String pan = "right";
-      String curView = view.whatView();
-      switch (curView) {
-        case "gui":
-          GuiView gui = (GuiView) view;
-          gui.panView(pan);
-          break;
-        case "midi":
-          break;
-        case "combo":
-          GuiView combo = (GuiView) view;
-          combo.panView(pan);
-          break;
-        default:
-          curView = "Invalid input";
-          break;
-      }
+
+      view.panView(pan);
 
     }
   }
@@ -174,22 +165,8 @@ public class Controller implements ActionListener {
   class PageUp implements Runnable {
     public void run() {
       String pan = "up";
-      String curView = view.whatView();
-      switch (curView) {
-        case "gui":
-          GuiView gui = (GuiView) view;
-          gui.panView(pan);
-          break;
-        case "midi":
-          break;
-        case "combo":
-          GuiView combo = (GuiView) view;
-          combo.panView(pan);
-          break;
-        default:
-          curView = "Invalid input";
-          break;
-      }
+      view.panView(pan);
+
 
     }
   }
@@ -197,22 +174,8 @@ public class Controller implements ActionListener {
   class PageDown implements Runnable {
     public void run() {
       String pan = "down";
-      String curView = view.whatView();
-      switch (curView) {
-        case "gui":
-          GuiView gui = (GuiView) view;
-          gui.panView(pan);
-          break;
-        case "midi":
-          break;
-        case "combo":
-          GuiView combo = (GuiView) view;
-          combo.panView(pan);
-          break;
-        default:
-          curView = "Invalid input";
-          break;
-      }
+      view.panView(pan);
+
 
     }
   }

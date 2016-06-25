@@ -74,6 +74,14 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   @Override
   public void displayRemoveNote() {
+    JFrame temp = new JFrame();
+    JPanel main = new JPanel();
+    main.setLayout(new FlowLayout());
+    main.add(new JLabel("To remove a note, click on its head"));
+    temp.add(main);
+    temp.setSize(new Dimension(500, 200));
+    temp.setVisible(true);
+
 
 
   }
@@ -143,8 +151,8 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   }
 
   @Override
-  public void updatePanel() {
-    int curBeat = 0;
+  public void updatePanel(IMusicModel m) {
+    this.displayPanel.updateBeat();
 
   }
 

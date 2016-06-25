@@ -63,4 +63,19 @@ public class StringView implements IView {
 
   }
 
+  @Override
+  public void displayRemoveNote() {
+
+  }
+
+  @Override
+  public void updatePanel(IMusicModel m) {
+
+  }
+
+  @Override
+  public void panView(String pan) {
+
+  }
+
 }

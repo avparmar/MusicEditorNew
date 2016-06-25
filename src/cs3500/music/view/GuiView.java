@@ -3,6 +3,8 @@ package cs3500.music.view;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
+import cs3500.music.model.IMusicModel;
+
 /**
  * Created by brendanreed on 6/21/16.
  */
@@ -27,5 +29,5 @@ public interface GuiView extends IView {
 
   ConcreteGuiViewPanel getPanel();
 
-  void updatePanel();
+  void updatePanel(IMusicModel m);
 }
