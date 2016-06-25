@@ -120,6 +120,7 @@ public class Controller implements ActionListener {
   class AddNote implements Runnable {
     public void run() {
       System.out.print("I got here");
+      view.displayAddNote();
       GuiView g = (GuiView) view;
       g.displayAddNote();
     }

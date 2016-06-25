@@ -181,10 +181,17 @@ public class MidiViewImpl implements IView {
 
   }
 
+  @Override
+  public void addActionListener(ActionListener a) {
+
+  }
+
   /*@Override
   public void addActionListener(ActionListener a) {
 
   }*/
+
+
 
  /* @Override
   public void addKeyListener(KeyboardListener kbd) {
@@ -199,6 +206,11 @@ public class MidiViewImpl implements IView {
   @Override
   public String whatView() {
     return "midi";
+  }
+
+  @Override
+  public void displayAddNote() {
+
   }
 
   public Synthesizer getSynth()

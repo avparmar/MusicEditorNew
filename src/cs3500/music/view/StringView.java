@@ -33,6 +33,11 @@ public class StringView implements IView {
     this.text = m.toString();
   }
 
+  @Override
+  public void addActionListener(ActionListener a) {
+
+  }
+
  /* @Override
   public void addActionListener(ActionListener a) {
 
@@ -51,6 +56,11 @@ public class StringView implements IView {
   @Override
   public String whatView() {
     return "console";
+  }
+
+  @Override
+  public void displayAddNote() {
+
   }
 
 }

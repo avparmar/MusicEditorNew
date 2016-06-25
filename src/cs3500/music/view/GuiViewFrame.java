@@ -43,6 +43,15 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
     this.displayPanel.setPreferredSize(new Dimension(this.displayPanel.setWidth(),
             this.displayPanel.setHeight()));
+    /*
+    ButtonGroup addRemove = new ButtonGroup();
+    JRadioButton add = new JRadioButton("Add");
+    JRadioButton remove = new JRadioButton("Remove");
+    addRemove.add(add);
+    addRemove.add(remove);
+    this.displayPanel.add(add);
+    this.displayPanel.add(remove);
+    */
     JScrollPane scroll = new JScrollPane(displayPanel);
     scroll.setPreferredSize(new Dimension(800, 400));
     scroll.getHorizontalScrollBar();
@@ -53,10 +62,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   }
 
-  /*@Override
+  @Override
   public void addActionListener(ActionListener listener) {
 
-  }*/
+  }
 
   @Override
   public void panView(String s) {
@@ -71,6 +80,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   @Override
   public void displayAddNote() {
+
     JFrame temp = new JFrame();
     JPanel main = new JPanel();
     main.setLayout(new FlowLayout());
@@ -132,11 +142,11 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     return this.displayPanel;
   }
 
- /* @Override
-  public void addKeyListener(KeyboardListener kbd) {
-    super.addKeyListener(kbd);
+  @Override
+  public void updatePanel() {
+    int curBeat = 0;
 
-  }*/
+  }
 
 
   @Override

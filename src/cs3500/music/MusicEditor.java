@@ -79,7 +79,7 @@ public class MusicEditor {
       e.printStackTrace();
     }
 
-    IView gv = new GuiViewFrame(m);
+    GuiView gv = new GuiViewFrame(m);
 
     Controller c = new Controller(m, gv);
 

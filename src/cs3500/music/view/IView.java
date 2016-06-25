@@ -16,7 +16,7 @@ public interface IView {
    */
   void display();
 
- // void addActionListener(ActionListener a);
+  void addActionListener(ActionListener a);
 
 
 //  void addKeyListener(KeyboardListener kbd);
@@ -28,4 +28,6 @@ public interface IView {
   void resetFocus();
 
   String whatView();
+
+  void displayAddNote();
 }

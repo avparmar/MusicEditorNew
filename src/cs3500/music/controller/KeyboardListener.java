@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by brendanreed on 6/21/16.
  */
-public class KeyboardListener implements KeyListener {
+public class KeyboardListener implements java.awt.event.KeyListener {
 
   private Map<Character, Runnable> keyTypedMap;
   private Map<Integer, Runnable> keyPressedMap, keyReleasedMap;
@@ -66,10 +66,13 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    System.out.println("keyTyped");
-
+    System.out.println("keyPressed");
+    Runnable r = keyPressedMap.get(e.getKeyCode());
+    c.setMode(r);
+    /*
     if (keyPressedMap.containsKey(e.getKeyCode()))
-      c.setMode(keyTypedMap.get(e.getKeyChar()));
+      c.setMode(keyPressedMap.get(e.getKeyCode()));
+      */
   }
 
   /**
@@ -79,9 +82,9 @@ public class KeyboardListener implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    System.out.println("keyTyped");
+    System.out.println("keyReleased");
 
     if (keyReleasedMap.containsKey(e.getKeyCode()))
-      c.setMode(keyTypedMap.get(e.getKeyChar()));
+      c.setMode(keyReleasedMap.get(e.getKeyChar()));
   }
 }
