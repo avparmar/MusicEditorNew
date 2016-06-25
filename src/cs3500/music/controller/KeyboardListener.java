@@ -57,6 +57,7 @@ public class KeyboardListener implements java.awt.event.KeyListener {
     System.out.println("keyTyped");
     if (keyTypedMap.containsKey(e.getKeyChar()))
       c.setMode(keyTypedMap.get(e.getKeyChar()));
+    System.out.println(c.getMode());
   }
 
   /**

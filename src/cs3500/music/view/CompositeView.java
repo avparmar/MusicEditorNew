@@ -31,6 +31,15 @@ public class CompositeView implements GuiView {
     midi.display();
   }
 
+  public ConcreteGuiViewPanel getPanel() {
+    return gui.getPanel();
+  }
+
+  @Override
+  public void updatePanel(IMusicModel m) {
+
+  }
+
   @Override
   public void addActionListener(ActionListener a) {
 
@@ -71,18 +80,6 @@ public class CompositeView implements GuiView {
 
 
   }
-
-  @Override
-  public ConcreteGuiViewPanel getPanel() {
-    return null;
-  }
-
-  @Override
-  public void updatePanel(IMusicModel m) {
-
-  }
-
-
 
 
   public void addKeyListener(KeyboardListener kbd) {

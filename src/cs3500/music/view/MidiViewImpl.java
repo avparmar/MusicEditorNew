@@ -186,12 +186,6 @@ public class MidiViewImpl implements IView {
 
   }
 
-  /*@Override
-  public void addActionListener(ActionListener a) {
-
-  }*/
-
-
 
  /* @Override
   public void addKeyListener(KeyboardListener kbd) {
