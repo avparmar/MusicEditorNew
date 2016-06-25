@@ -24,8 +24,7 @@ public class CompositeView implements GuiView {
   @Override
   public void display() {
     int beat = 0;
-    gui.getPanel().add(new JRadioButton("Remove"));
-    gui.getPanel().add(new JRadioButton("Add"));
+
     gui.display();
 
     midi.display();
@@ -67,11 +66,13 @@ public class CompositeView implements GuiView {
 
   @Override
   public void displayRemoveNote() {
+    gui.displayRemoveNote();
 
   }
 
   @Override
   public void displayAddNote() {
+    gui.displayAddNote();
 
   }
 
@@ -81,10 +82,6 @@ public class CompositeView implements GuiView {
 
   }
 
-
-  public void addKeyListener(KeyboardListener kbd) {
-
-  }
 
   @Override
   public void resetFocus() {
