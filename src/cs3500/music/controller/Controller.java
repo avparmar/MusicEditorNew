@@ -107,6 +107,7 @@ public class Controller implements ActionListener {
 
   public void setMode(Runnable r) {
     mode = r;
+    mode.run();
   }
 
   public Runnable getMode() {

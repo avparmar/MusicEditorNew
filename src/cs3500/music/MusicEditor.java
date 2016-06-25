@@ -83,7 +83,7 @@ public class MusicEditor {
 
     CompositeView gv = new CompositeView(new GuiViewFrame(m), new MidiViewImpl(m));
 
-   // MidiViewImpl gv = new MidiViewImpl(m);
+    //MidiViewImpl gv = new MidiViewImpl(m);
     Controller c = new Controller(m, gv);
 
 
