@@ -33,15 +33,15 @@ public class StringView implements IView {
     this.text = m.toString();
   }
 
-  @Override
+ /* @Override
   public void addActionListener(ActionListener a) {
 
-  }
+  }*/
 
-  @Override
+  /*@Override
   public void addKeyListener(KeyboardListener kbd) {
 
-  }
+  }*/
 
   @Override
   public void resetFocus() {

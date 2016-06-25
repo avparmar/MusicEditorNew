@@ -53,10 +53,10 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   }
 
-  @Override
+  /*@Override
   public void addActionListener(ActionListener listener) {
 
-  }
+  }*/
 
   @Override
   public void panView(String s) {
@@ -132,11 +132,11 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     return this.displayPanel;
   }
 
-  @Override
+ /* @Override
   public void addKeyListener(KeyboardListener kbd) {
+    super.addKeyListener(kbd);
 
-
-  }
+  }*/
 
 
   @Override

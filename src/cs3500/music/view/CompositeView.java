@@ -26,15 +26,15 @@ public class CompositeView implements GuiView {
     midi.display();
   }
 
-  @Override
+ /*@Override
   public void addKeyListener(KeyListener listener) {
 
-  }
+  }*/
 
-  @Override
+ /* @Override
   public void addActionListener(ActionListener a) {
 
-  }
+  }*/
 
   @Override
   public void panView(String s) {
@@ -62,10 +62,10 @@ public class CompositeView implements GuiView {
     return null;
   }
 
-  @Override
+ /* @Override
   public void addKeyListener(KeyboardListener kbd) {
 
-  }
+  }*/
 
   @Override
   public void resetFocus() {

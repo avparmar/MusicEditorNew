@@ -14,9 +14,9 @@ public interface GuiView extends IView {
    *
    * Thus our Swing-based implementation of this interface will already have such a method.
    */
-  void addKeyListener(KeyListener listener);
+ // void addKeyListener(KeyListener listener);
 
-  void addActionListener(ActionListener listener);
+ // void addActionListener(ActionListener listener);
 
   void panView(String s);
 

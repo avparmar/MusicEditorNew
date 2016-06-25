@@ -186,10 +186,10 @@ public class MidiViewImpl implements IView {
 
   }
 
-  @Override
+ /* @Override
   public void addKeyListener(KeyboardListener kbd) {
 
-  }
+  }*/
 
   @Override
   public void resetFocus() {

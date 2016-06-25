@@ -3,6 +3,7 @@ package cs3500.music.controller;
 import cs3500.music.model.IMusicModel;
 import cs3500.music.view.GuiView;
 import cs3500.music.view.IView;
+import cs3500.music.controller.KeyboardListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,9 +40,11 @@ public class Controller implements ActionListener {
 
 
       configureKeyBoardListener();
-      configureMouseListener();
+ //     configureMouseListener();
+
       g.getPanel().addKeyListener(kl);
-      g.getPanel().addMouseListener(ml);
+
+  //    g.getPanel().addMouseListener(ml);
       this.view = g;
       this.view.addActionListener(this);
  //   }
@@ -70,10 +73,10 @@ public class Controller implements ActionListener {
     keyPresses.put(KeyEvent.VK_KP_UP, new PageUp());
     keyPresses.put(KeyEvent.VK_KP_DOWN, new PageDown());
 
-    KeyboardListener kbd = new KeyboardListener(this);
-    kbd.setKeyTypedMap(keyTypes);
-    kbd.setKeyPressedMap(keyPresses);
-    kbd.setKeyReleasedMap(keyReleases);
+    KeyListener kbd = new KeyboardListener(this);
+ //   kbd.setKeyTypedMap(keyTypes);
+//    kbd.setKeyPressedMap(keyPresses);
+  //  kbd.setKeyReleasedMap(keyReleases);
     this.kl = kbd;
 
   }

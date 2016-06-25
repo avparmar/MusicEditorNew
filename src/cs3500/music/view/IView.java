@@ -16,10 +16,10 @@ public interface IView {
    */
   void display();
 
-  void addActionListener(ActionListener a);
+ // void addActionListener(ActionListener a);
 
 
-  void addKeyListener(KeyboardListener kbd);
+//  void addKeyListener(KeyboardListener kbd);
 
   /**
    * Reset the focus on the appropriate part of the view that has the keyboard listener attached to
