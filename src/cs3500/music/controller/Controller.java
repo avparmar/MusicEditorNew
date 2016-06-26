@@ -166,9 +166,11 @@ public class Controller implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+System.out.println("ewr");
     if (e.getActionCommand().equals("add")) {
-
+      GuiView g = (GuiView)view;
+      String[] work = g.getInfo();
+      System.out.println(work[0]);
     }
   }
 

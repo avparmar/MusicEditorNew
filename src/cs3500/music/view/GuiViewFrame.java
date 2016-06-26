@@ -15,6 +15,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   protected ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
   Controller c;
+  JFrame temp;
 
   /**
    * Creates new GuiView
@@ -85,7 +86,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   @Override
   public void displayAddNote() {
 
-    JFrame temp = new JFrame();
+    this.temp = new JFrame();
     JPanel main = new JPanel();
     main.setLayout(new FlowLayout());
     JPanel t = new JPanel();
@@ -127,6 +128,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     text4.setColumns(5);
     jb.add(new JLabel("Submit"));
     jb.setActionCommand("add");
+    System.out.println(getController());
     jb.addActionListener(getController());
     i.add(text4);
     main.add(v);
@@ -174,6 +176,40 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   }
   public void setController(Controller c) {
     this.c = c;
+  }
+
+  public JFrame getTemp() { return temp; }
+
+  public String[] getInfo() {
+    String[] res = new String[7];
+    Component[] work = temp.getComponents();
+
+    JPanel w1 = (JPanel)work[0];
+    JTextField jtf1 = (JTextField) w1.getComponent(1);
+
+    res[0] = jtf1.getText();
+
+    JPanel w2 = (JPanel) work[1];
+    JTextField jtf2 = (JTextField) w2.getComponent(1);
+
+    res[1] = jtf2.getText();
+
+    JPanel w3 = (JPanel) work[2];
+    JTextField jtf3 = (JTextField) w3.getComponent(1);
+
+    res[2] = jtf2.getText();
+
+    JPanel w4 = (JPanel) work[3];
+    JComboBox jcb = (JComboBox) w4.getComponent(1);
+    res[3] = (String) jcb.getSelectedItem();
+
+    JPanel w5 = (JPanel) work[4];
+    JTextField jtf4 = (JTextField) w5.getComponent(1);
+
+    res[4] = jtf4.getText();
+
+
+    return res;
   }
 
 }
