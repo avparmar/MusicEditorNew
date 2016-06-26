@@ -16,6 +16,11 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   protected ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
   Controller c;
   JFrame temp;
+  JComboBox jcb;
+  JTextField jtf1;
+  JTextField jtf2;
+  JTextField jtf3;
+  JTextField jtf4;
 
   /**
    * Creates new GuiView
@@ -105,32 +110,32 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     options.addElement("A");
     options.addElement("A#");
     options.addElement("B");
-    JComboBox combo = new JComboBox(options);
-    t.add(combo);
+    this.jcb= new JComboBox(options);
+    t.add(jcb);
     JPanel o = new JPanel();
     o.add(new JLabel("Input an Octave: "));
-    JTextField text1 = new JTextField();
-    text1.setColumns(5);
-    o.add(text1);
+    this.jtf1 = new JTextField();
+    jtf1.setColumns(5);
+    o.add(jtf1);
     JPanel b = new JPanel();
     b.add(new JLabel("Input number of beats: "));
-    JTextField text2 = new JTextField();
-    text2.setColumns(5);
-    b.add(text2);
+    this.jtf2 = new JTextField();
+    jtf2.setColumns(5);
+    b.add(jtf2);
     JPanel v = new JPanel();
     v.add(new JLabel("Input volume: "));
-    JTextField text3 = new JTextField();
-    text3.setColumns(5);
-    v.add(text3);
+    this.jtf3 = new JTextField();
+    jtf3.setColumns(5);
+    v.add(jtf3);
     JPanel i = new JPanel();
     i.add(new JLabel("Input instrument: "));
-    JTextField text4 = new JTextField();
-    text4.setColumns(5);
+    this.jtf4 = new JTextField();
+    jtf4.setColumns(5);
     jb.add(new JLabel("Submit"));
     jb.setActionCommand("add");
     System.out.println(getController());
     jb.addActionListener(getController());
-    i.add(text4);
+    i.add(jtf4);
     main.add(v);
     main.add(i);
     main.add(b);
@@ -181,7 +186,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   public JFrame getTemp() { return temp; }
 
   public String[] getInfo() {
-    String[] res = new String[7];
+    String[] res = new String[5];/*
     Component[] work = temp.getComponents();
 
     JPanel w1 = (JPanel)work[0];
@@ -208,7 +213,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
     res[4] = jtf4.getText();
 
-
+*/
+    res[0] = jtf1.getText();
+    res[1] = jtf2.getText();
+    res[2] = jtf3.getText();
+    res[3] = jtf4.getText();
+    res[4] = (String) jcb.getSelectedItem();
     return res;
   }
 
