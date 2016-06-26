@@ -21,6 +21,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   JTextField jtf2;
   JTextField jtf3;
   JTextField jtf4;
+  JTextField jtf5;
 
   /**
    * Creates new GuiView
@@ -131,6 +132,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     i.add(new JLabel("Input instrument: "));
     this.jtf4 = new JTextField();
     jtf4.setColumns(5);
+
+    JPanel zz = new JPanel();
+    zz.add(new JLabel("Input start time: "));
+    this.jtf5 = new JTextField();
+    jtf5.setColumns(5);
+    zz.add(jtf5);
     jb.add(new JLabel("Submit"));
     jb.setActionCommand("add");
     System.out.println(getController());
@@ -142,6 +149,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     main.add(t);
     main.add(o);
     main.add(jb);
+    main.add(zz);
     temp.add(main);
 
     temp.setSize(new Dimension(500, 200));
@@ -186,7 +194,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   public JFrame getTemp() { return temp; }
 
   public String[] getInfo() {
-    String[] res = new String[5];/*
+    String[] res = new String[6];/*
     Component[] work = temp.getComponents();
 
     JPanel w1 = (JPanel)work[0];
@@ -219,6 +227,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     res[2] = jtf3.getText();
     res[3] = jtf4.getText();
     res[4] = (String) jcb.getSelectedItem();
+    res[5] = jtf5.getText();
     return res;
   }
 
