@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  * Created by brendanreed on 6/21/16
@@ -58,7 +57,6 @@ public class Controller implements ActionListener {
       g.getPanel().setFocusable(true);
       g.getPanel().requestFocus();
 
-      //   System.out.println(g.getPanel().getKeyListeners()[0]);
       this.view = g;
 
       //     this.view.addActionListener(this);
@@ -280,8 +278,7 @@ public class Controller implements ActionListener {
           break;
       }
       model.remove(new Note(t, Integer.parseInt(work[1]), Integer.parseInt(work[0]),
-              Integer.parseInt(work[5]), Integer.parseInt(work[2])
-              , Integer.parseInt(work[3])));
+              Integer.parseInt(work[5])));
 
       g.getPanel().repaint();
     }

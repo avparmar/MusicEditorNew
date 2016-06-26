@@ -108,13 +108,13 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     this.jtf2 = new JTextField();
     jtf2.setColumns(5);
     b.add(jtf2);
-    JPanel v = new JPanel();
-    v.add(new JLabel("Input volume: "));
+    //JPanel v = new JPanel();
+   // v.add(new JLabel("Input volume: "));
     this.jtf3 = new JTextField();
     jtf3.setColumns(5);
-    v.add(jtf3);
-    JPanel i = new JPanel();
-    i.add(new JLabel("Input instrument: "));
+   // v.add(jtf3);
+  //  JPanel i = new JPanel();
+  //  i.add(new JLabel("Input instrument: "));
     this.jtf4 = new JTextField();
     jtf4.setColumns(5);
 
@@ -127,9 +127,9 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     jb.setActionCommand("del");
     System.out.println(getController());
     jb.addActionListener(getController());
-    i.add(jtf4);
-    main.add(v);
-    main.add(i);
+  //  i.add(jtf4);
+  //  main.add(v);
+  //  main.add(i);
     main.add(b);
     main.add(t);
     main.add(o);
@@ -249,34 +249,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   public JFrame getTemp() { return temp; }
 
   public String[] getInfo() {
-    String[] res = new String[6];/*
-    Component[] work = temp.getComponents();
-
-    JPanel w1 = (JPanel)work[0];
-    JTextField jtf1 = (JTextField) w1.getComponent(1);
-
-    res[0] = jtf1.getText();
-
-    JPanel w2 = (JPanel) work[1];
-    JTextField jtf2 = (JTextField) w2.getComponent(1);
-
-    res[1] = jtf2.getText();
-
-    JPanel w3 = (JPanel) work[2];
-    JTextField jtf3 = (JTextField) w3.getComponent(1);
-
-    res[2] = jtf2.getText();
-
-    JPanel w4 = (JPanel) work[3];
-    JComboBox jcb = (JComboBox) w4.getComponent(1);
-    res[3] = (String) jcb.getSelectedItem();
-
-    JPanel w5 = (JPanel) work[4];
-    JTextField jtf4 = (JTextField) w5.getComponent(1);
-
-    res[4] = jtf4.getText();
-
-*/
+    String[] res = new String[6];
     res[0] = jtf1.getText();
     res[1] = jtf2.getText();
     res[2] = jtf3.getText();

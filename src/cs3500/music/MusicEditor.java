@@ -22,7 +22,7 @@ import javax.sound.midi.InvalidMidiDataException;
 
 
 public class MusicEditor {
-  /*public static void main(String[] args) throws IOException, InvalidMidiDataException {
+  public static void main(String[] args) throws IOException, InvalidMidiDataException {
     MusicReader mr = new MusicReader();
     Scanner init = new Scanner(System.in);
     System.out.print("Enter the file you want to play: ");
@@ -70,7 +70,7 @@ public class MusicEditor {
     }
 
 
-  }*/
+  }/*
   public static void main(String[] args) {
     IMusicModel m = null;
     try {
@@ -87,5 +87,5 @@ public class MusicEditor {
     Controller c = new Controller(m, gv);
 
 
-  }
+  }*/
 }

@@ -54,10 +54,8 @@ public class KeyboardHandler implements java.awt.event.KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
-    System.out.println("keyTyped");
     if (keyTypedMap.containsKey(e.getKeyChar()))
       c.setMode(keyTypedMap.get(e.getKeyChar()));
-    System.out.println(c.getMode());
   }
 
   /**
@@ -67,7 +65,6 @@ public class KeyboardHandler implements java.awt.event.KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    System.out.println("keyPressed");
     Runnable r = null;
     if (keyPressedMap.get(e.getKeyCode()) != null) {
     r = keyPressedMap.get(e.getKeyCode());
@@ -85,7 +82,6 @@ public class KeyboardHandler implements java.awt.event.KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    System.out.println("keyReleased");
 
     if (keyReleasedMap.containsKey(e.getKeyCode()))
       c.setMode(keyReleasedMap.get(e.getKeyChar()));
