@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sound.midi.Synthesizer;
 
 import cs3500.music.controller.Controller;
@@ -15,6 +19,7 @@ import cs3500.music.view.StringView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -944,9 +949,27 @@ public class MusicModelTest {
   @Test
   public void testKeyboardHandler() {
     IMusicModel m = new MusicModel();
+    m.write(Tone.A, 1, 3);
+    m.write(Tone.D, 2, 3);
+    m.advance();
+    m.write(Tone.B, 12, 4);
     GuiView gui = new GuiViewFrame(m);
     Controller c = new Controller(m, gui);
     KeyboardHandler temp = new KeyboardHandler(c);
+
+    class NextBeat implements Runnable {
+      public void run() {
+        m.advance();
+      }
+    }
+
+    Runnable tempNext = new NextBeat();
+
+    Map<Integer, Runnable> tempMap = new HashMap<Integer, Runnable>();
+    tempMap.put(KeyEvent.VK_N, tempNext);
+    temp.setKeyPressedMap(tempMap);
+
+    assertEquals(temp.getKeyPressedMap().get(KeyEvent.VK_N), tempNext);
 
   }
 
@@ -955,6 +978,46 @@ public class MusicModelTest {
     IMusicModel m = new MusicModel();
     GuiView gui = new GuiViewFrame(m);
     Controller c = new Controller(m, gui);
+    KeyboardHandler temp = new KeyboardHandler(c);
+
+    class NextBeat implements Runnable {
+      public void run() {
+        m.advance();
+      }
+    }
+
+    Runnable tempNext = new NextBeat();
+    Map<Integer, Runnable> tempMap = new HashMap<Integer, Runnable>();
+    tempMap.put(KeyEvent.VK_N, tempNext);
+    temp.setKeyPressedMap(tempMap);
+    c.setKeyboardHandler(temp);
+    c.setMode(tempNext);
+
+    assertEquals(c.getMode(), tempNext);
+
+    class NextMeasure implements Runnable {
+      public void run() {
+        m.advance();
+        m.advance();
+        m.advance();
+        m.advance();
+      }
+    }
+
+    Runnable tempNextMeasure = new NextMeasure();
+    c.setMode(tempNextMeasure);
+    assertEquals(c.getMode(), tempNextMeasure);
+
+    assertEquals(c.getView(), gui);
+
+    MidiViewImpl midi = new MidiViewImpl(m);
+    c.setView(midi);
+
+    assertEquals(c.getView(), midi);
+
+
+
+
   }
 
 

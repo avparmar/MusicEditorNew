@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.plaf.basic.BasicComboBoxUI;
+
 /**
  * Created by brendanreed on 6/21/16
  */
@@ -150,6 +152,17 @@ public class Controller implements ActionListener {
     return ml;
   }
 
+  public void setKeyboardHandler(KeyboardHandler k) {
+    this.kl = k;
+  }
+
+  public void setView(IView v) {
+    this.view = v;
+  }
+
+  public IView getView() {
+    return this.view;
+  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -305,4 +318,6 @@ public class Controller implements ActionListener {
 
     }
   }
+
+
 }
