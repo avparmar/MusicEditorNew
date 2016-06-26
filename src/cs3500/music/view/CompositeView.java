@@ -22,7 +22,7 @@ public class CompositeView implements GuiView {
 
   @Override
   public void display() {
-    int beat = 0;
+
 
     gui.display();
 

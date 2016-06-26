@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public class KeyboardHandler implements java.awt.event.KeyListener {
 
-  private Map<Character, Runnable> keyTypedMap;
-  private Map<Integer, Runnable> keyPressedMap, keyReleasedMap;
+  protected Map<Character, Runnable> keyTypedMap;
+  protected Map<Integer, Runnable> keyPressedMap, keyReleasedMap;
   private Controller c;
 
   /**
@@ -89,5 +89,9 @@ public class KeyboardHandler implements java.awt.event.KeyListener {
 
     if (keyReleasedMap.containsKey(e.getKeyCode()))
       c.setMode(keyReleasedMap.get(e.getKeyChar()));
+  }
+
+  public Map<Integer, Runnable> getKeyPressedMap() {
+    return this.keyPressedMap;
   }
 }
