@@ -1,6 +1,7 @@
 package cs3500.music.controller;
 
 import cs3500.music.model.IMusicModel;
+import cs3500.music.model.Note;
 import cs3500.music.model.Tone;
 import cs3500.music.view.CompositeView;
 import cs3500.music.view.GuiView;
@@ -222,6 +223,65 @@ public class Controller implements ActionListener {
       model.writeTime(t, Integer.parseInt(work[1]), Integer.parseInt(work[0]),
               Integer.parseInt(work[5]), Integer.parseInt(work[2])
               , Integer.parseInt(work[3]));
+
+      g.getPanel().repaint();
+    }
+
+    if (e.getActionCommand().equals("del")) {
+      GuiView g = (GuiView)view;
+      String[] work = g.getInfo();
+
+      // octave = work[0]
+      // duration = work[1]
+      // volume = work[2]
+      // instrument = work[3]
+      // tone = work[4]
+
+      Tone t;
+      switch (work[4]) {
+        case "C":
+          t = Tone.C;
+          break;
+        case "C#":
+          t = Tone.Csharp;
+          break;
+        case "D":
+          t = Tone.D;
+          break;
+        case "D#":
+          t = Tone.Dsharp;
+          break;
+        case "E":
+          t = Tone.E;
+          break;
+        case "F":
+          t = Tone.F;
+          break;
+        case "F#":
+          t = Tone.Fsharp;
+          break;
+        case "G":
+          t = Tone.G;
+          break;
+        case "G#":
+          t = Tone.Gsharp;
+          break;
+        case "A":
+          t = Tone.A;
+          break;
+        case "A#":
+          t = Tone.Asharp;
+          break;
+        case "B":
+          t = Tone.B;
+          break;
+        default:
+          t = null;
+          break;
+      }
+      model.remove(new Note(t, Integer.parseInt(work[1]), Integer.parseInt(work[0]),
+              Integer.parseInt(work[5]), Integer.parseInt(work[2])
+              , Integer.parseInt(work[3])));
 
       g.getPanel().repaint();
     }

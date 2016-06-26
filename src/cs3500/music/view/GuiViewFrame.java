@@ -77,11 +77,66 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   @Override
   public void displayRemoveNote() {
-    JFrame temp = new JFrame();
+    this.temp = new JFrame();
     JPanel main = new JPanel();
     main.setLayout(new FlowLayout());
-    main.add(new JLabel("To remove a note, click on its head"));
+    JPanel t = new JPanel();
+    JButton jb = new JButton();
+    t.add(new JLabel("Pick a tone: "));
+    DefaultComboBoxModel options = new DefaultComboBoxModel();
+    options.addElement("C");
+    options.addElement("C#");
+    options.addElement("D");
+    options.addElement("D#");
+    options.addElement("E");
+    options.addElement("F");
+    options.addElement("F#");
+    options.addElement("G");
+    options.addElement("G#");
+    options.addElement("A");
+    options.addElement("A#");
+    options.addElement("B");
+    this.jcb= new JComboBox(options);
+    t.add(jcb);
+    JPanel o = new JPanel();
+    o.add(new JLabel("Input an Octave: "));
+    this.jtf1 = new JTextField();
+    jtf1.setColumns(5);
+    o.add(jtf1);
+    JPanel b = new JPanel();
+    b.add(new JLabel("Input number of beats: "));
+    this.jtf2 = new JTextField();
+    jtf2.setColumns(5);
+    b.add(jtf2);
+    JPanel v = new JPanel();
+    v.add(new JLabel("Input volume: "));
+    this.jtf3 = new JTextField();
+    jtf3.setColumns(5);
+    v.add(jtf3);
+    JPanel i = new JPanel();
+    i.add(new JLabel("Input instrument: "));
+    this.jtf4 = new JTextField();
+    jtf4.setColumns(5);
+
+    JPanel zz = new JPanel();
+    zz.add(new JLabel("Input start time: "));
+    this.jtf5 = new JTextField();
+    jtf5.setColumns(5);
+    zz.add(jtf5);
+    jb.add(new JLabel("Remove it"));
+    jb.setActionCommand("del");
+    System.out.println(getController());
+    jb.addActionListener(getController());
+    i.add(jtf4);
+    main.add(v);
+    main.add(i);
+    main.add(b);
+    main.add(t);
+    main.add(o);
+    main.add(jb);
+    main.add(zz);
     temp.add(main);
+
     temp.setSize(new Dimension(500, 200));
     temp.setVisible(true);
 
@@ -138,7 +193,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     this.jtf5 = new JTextField();
     jtf5.setColumns(5);
     zz.add(jtf5);
-    jb.add(new JLabel("Submit"));
+    jb.add(new JLabel("Add it"));
     jb.setActionCommand("add");
     System.out.println(getController());
     jb.addActionListener(getController());
