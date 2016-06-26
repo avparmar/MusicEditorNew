@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
+import cs3500.music.controller.Controller;
 import cs3500.music.model.IMusicModel;
 
 /**
@@ -12,6 +13,7 @@ public class CompositeView implements GuiView {
 
   private GuiView gui;
   private IView midi;
+  private Controller c;
 
   public CompositeView(GuiView g, IView m) {
     this.gui = g;
@@ -24,7 +26,7 @@ public class CompositeView implements GuiView {
 
     gui.display();
 
-    midi.display();
+   midi.display();
   }
 
   public ConcreteGuiViewPanel getPanel() {
@@ -91,7 +93,13 @@ public class CompositeView implements GuiView {
     return "composite";
   }
 
+  public void setController(Controller c){
+    this.c = c;
+  }
 
+  public Controller getController() {
+    return c;
+  }
 
 
 }

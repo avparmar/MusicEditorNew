@@ -42,16 +42,15 @@ public class Controller implements ActionListener {
     if (cur.equals("gui")) {
       GuiView g = (GuiView) v;
 
-
-      configureKeyBoardListener();
       configureMouseListener();
-
+      configureKeyBoardListener();
 
       g.getPanel().addKeyListener(kl);
 
 
       g.getPanel().addMouseListener(ml);
 
+      g.setController(this);
       g.getPanel().setFocusable(true);
       g.getPanel().requestFocus();
 
@@ -78,6 +77,7 @@ public class Controller implements ActionListener {
 
       cv.getPanel().setFocusable(true);
       cv.getPanel().requestFocus();
+      cv.setController(this);
       this.view = cv;
       this.view.display();
     }
@@ -154,6 +154,9 @@ public class Controller implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
+    if (e.getActionCommand().equals("add")) {
+
+    }
   }
 
 

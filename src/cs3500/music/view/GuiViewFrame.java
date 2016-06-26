@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import cs3500.music.controller.Controller;
 import cs3500.music.model.IMusicModel;
 
 /**
@@ -13,6 +14,7 @@ import cs3500.music.model.IMusicModel;
 public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   protected ConcreteGuiViewPanel displayPanel; // You may want to refine this to a subtype of JPanel
+  Controller c;
 
   /**
    * Creates new GuiView
@@ -87,6 +89,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     JPanel main = new JPanel();
     main.setLayout(new FlowLayout());
     JPanel t = new JPanel();
+    JButton jb = new JButton();
     t.add(new JLabel("Pick a tone: "));
     DefaultComboBoxModel options = new DefaultComboBoxModel();
     options.addElement("C");
@@ -122,12 +125,16 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     i.add(new JLabel("Input instrument: "));
     JTextField text4 = new JTextField();
     text4.setColumns(5);
+    jb.add(new JLabel("Submit"));
+    jb.setActionCommand("add");
+    jb.addActionListener(getController());
     i.add(text4);
     main.add(v);
     main.add(i);
     main.add(b);
     main.add(t);
     main.add(o);
+    main.add(jb);
     temp.add(main);
 
     temp.setSize(new Dimension(500, 200));
@@ -160,6 +167,13 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   @Override
   public String whatView() {
     return "gui";
+  }
+
+  public Controller getController() {
+    return c;
+  }
+  public void setController(Controller c) {
+    this.c = c;
   }
 
 }
