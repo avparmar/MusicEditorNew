@@ -1,9 +1,7 @@
 package cs3500.music.view;
 
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 
-import cs3500.music.controller.KeyboardListener;
 import cs3500.music.model.IMusicModel;
 
 /**
@@ -19,7 +17,7 @@ public interface IView {
   void addActionListener(ActionListener a);
 
 
-//  void addKeyListener(KeyboardListener kbd);
+//  void addKeyListener(KeyboardHandler kbd);
 
   /**
    * Reset the focus on the appropriate part of the view that has the keyboard listener attached to

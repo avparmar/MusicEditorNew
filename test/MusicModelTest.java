@@ -2,12 +2,15 @@ import org.junit.Test;
 
 import javax.sound.midi.Synthesizer;
 
+import cs3500.music.controller.Controller;
+import cs3500.music.controller.KeyboardHandler;
+import cs3500.music.model.IMusicModel;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
 import cs3500.music.model.Tone;
+import cs3500.music.view.GuiView;
+import cs3500.music.view.GuiViewFrame;
 import cs3500.music.view.MidiViewImpl;
-import cs3500.music.view.MockRecv;
-import cs3500.music.view.MockSynth;
 import cs3500.music.view.StringView;
 
 import static org.junit.Assert.assertEquals;
@@ -936,6 +939,22 @@ public class MusicModelTest {
             "Message: [B@14899482\n", midi.getSynth().toString());
 
 
+  }
+
+  @Test
+  public void testKeyboardHandler() {
+    IMusicModel m = new MusicModel();
+    GuiView gui = new GuiViewFrame(m);
+    Controller c = new Controller(m, gui);
+    KeyboardHandler temp = new KeyboardHandler(c);
+
+  }
+
+  @Test
+  public void testController() {
+    IMusicModel m = new MusicModel();
+    GuiView gui = new GuiViewFrame(m);
+    Controller c = new Controller(m, gui);
   }
 
 

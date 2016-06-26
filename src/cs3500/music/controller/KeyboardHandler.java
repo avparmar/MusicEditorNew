@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by brendanreed on 6/21/16.
  */
-public class KeyboardListener implements java.awt.event.KeyListener {
+public class KeyboardHandler implements java.awt.event.KeyListener {
 
   private Map<Character, Runnable> keyTypedMap;
   private Map<Integer, Runnable> keyPressedMap, keyReleasedMap;
@@ -16,7 +16,7 @@ public class KeyboardListener implements java.awt.event.KeyListener {
   /**
    * Empty default constructor
    */
-  public KeyboardListener(Controller c) {
+  public KeyboardHandler(Controller c) {
     this.c = c;
 
 
